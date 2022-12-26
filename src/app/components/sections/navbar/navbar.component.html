@@ -1,0 +1,41 @@
+<mat-toolbar class="top-nav">
+  <div class="left">
+    <div class="bigScreen">
+      <a href="/">Bitu</a>
+      <a href="/">TV Shows</a>
+      <a href="/">Movies</a>
+      <a href="/">New & Popular</a>
+      <a href="/">Browse by Languages</a>
+    </div>
+    <div class="smallScreen">
+      <span
+        class="openMenu"
+        [matMenuTriggerFor]="smallNavBar"
+        aria-label="smallNavBar-label"
+      >
+        <span class="material-icons">menu</span>
+      </span>
+      <mat-menu #smallNavBar="matMenu">
+        <a mat-menu-item href="/">TV Shows</a>
+        <a mat-menu-item href="/">Movies</a>
+        <a mat-menu-item href="/">New & Popular</a>
+        <a mat-menu-item href="/">Browse by Languages</a>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="right">
+    <a href="/">My List</a>
+    <span
+      class="openMenu"
+      [matMenuTriggerFor]="menu"
+      aria-label="profile-label"
+    >
+      Profile
+    </span>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item href="/">Add To Favorite List</a>
+      <a mat-menu-item href="/">Add New Movie</a>
+      <a mat-menu-item href="/">Change My Account</a>
+    </mat-menu>
+  </div>
+</mat-toolbar>

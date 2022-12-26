@@ -1,0 +1,51 @@
+.top-nav {
+    .left {
+        .bigScreen {
+            display: none;
+        }
+        .smallScreen {
+            display: inline-block;
+        }
+    }
+    div {
+        a {
+            font-size: 1em;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            margin: 10px;
+        }
+        &.right {
+            margin-left: auto;
+        }
+    }
+
+    .openMenu {
+        cursor: pointer;
+    }
+    .material-icons {
+        font-size: 2em;
+    }
+    @media(min-width: 800px) {
+        .left {
+            .bigScreen {
+                display: inline-block;
+            }
+
+            .smallScreen {
+                display: none;
+            }
+        }
+    }
+
+    @media(min-width: 1400px) {
+        div {
+            a {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        }
+    }
+
+
+}
