@@ -14,6 +14,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
+import { AddtoFavComponent } from './components/pages/Page/List/addto-fav/addto-fav.component';
+import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-movie.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { MatIconModule } from '@angular/material/icon';
     MylistComponent,
     NavbarComponent,
     MovieComponent,
-    SlideshowComponent
+    SlideshowComponent,
+    PageNotFoundComponent,
+    AddtoFavComponent,
+    AddMovieComponent
   ],
   imports: [
     BrowserModule,
