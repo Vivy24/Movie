@@ -11,27 +11,39 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class NavbarComponent implements OnInit {
   @ViewChildren(MatMenuTrigger) triggers: QueryList<MatMenuTrigger> | undefined;
-  listOfGenre: Array<Genre> = [];
+  listOfMovieGenre: Array<Genre> = [];
+  listOfTvShowGenre: Array<Genre> = [];
   constructor(
     private moviesService: MoviesService
   ) { }
 
   ngOnInit(): void {
-    if (this.listOfGenre.length == 0) {
-      this.moviesService.getGenres();
-
+    if (this.listOfMovieGenre.length == 0) {
+      this.moviesService.getMovieGenres();
     }
 
-    // subscribe to the genre list
-    this.moviesService.listOfGenres$.pipe(filter(genre => !!genre)).subscribe({
+    if (this.listOfTvShowGenre.length == 0) {
+      this.moviesService.getTvShowGenres();
+    }
+
+    // subscribe to the movie genre list
+    this.moviesService.listOfMovieGenres$.pipe(filter(genre => !!genre)).subscribe({
       next: genre => {
-        this.listOfGenre = genre
+        this.listOfMovieGenre = genre
       },
       error: error => {
         console.log(error);
       }
     })
 
+    this.moviesService.listOfTvShowGenres$.pipe(filter(genre => !!genre)).subscribe({
+      next: genre => {
+        this.listOfTvShowGenre = genre
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
   }
 
   // close all menu when window screen change

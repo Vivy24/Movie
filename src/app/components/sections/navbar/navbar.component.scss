@@ -7,7 +7,7 @@
         margin: auto;
         color: white;
         font-size: 1em;
-        width: 100px;
+        width: 150px;
     }
 
     ::ng-deep .horizontal-item:hover {
@@ -22,7 +22,7 @@
         padding: 0.75em;
 
         @media(min-width: 800px) {
-            width: 400px;
+            width: 300px;
         }
 
     }
@@ -36,6 +36,13 @@
             .smallScreen {
                 display: inline-block;
             }
+
+            @media(min-width: 800px) {
+                span {
+                    margin: 1em;
+                }
+            }
+
         }
 
         div {

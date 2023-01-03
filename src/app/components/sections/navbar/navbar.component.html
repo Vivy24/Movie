@@ -2,30 +2,42 @@
   <div class="left">
     <div class="bigScreen">
       <a routerLink="/home">Bitu</a>
-      <a routerLink="/tvShow">TV Shows</a>
-      <a routerLink="/movies">Movies</a>
-      <a routerLink="/popular">New & Popular</a>
       <span
         class="openGenres"
-        [matMenuTriggerFor]="genresMenu"
-        aria-label="open-genres-label"
+        [matMenuTriggerFor]="genresTvShows"
+        aria-label="open--genres-label"
       >
-        Genres
+        TV Shows
       </span>
 
-      <mat-menu
-        #genresMenu="matMenu"
-        class="list-horizontal"
-        xPosition="before"
-      >
+      <mat-menu #genresTvShows="matMenu" class="list-horizontal">
         <a
           class="horizontal-item"
-          *ngFor="let genre of listOfGenre"
+          *ngFor="let genre of listOfTvShowGenre"
           mat-list-item
           [routerLink]="'/search/' + genre.id"
           >{{ genre.name }}</a
         >
       </mat-menu>
+      <!-- <a routerLink="/tvShow"></a> -->
+      <span
+        class="openGenres"
+        [matMenuTriggerFor]="genresMovie"
+        aria-label="open--genres-label"
+      >
+        Movies
+      </span>
+
+      <mat-menu #genresMovie="matMenu" class="list-horizontal">
+        <a
+          class="horizontal-item"
+          *ngFor="let genre of listOfMovieGenre"
+          mat-list-item
+          [routerLink]="'/search/' + genre.id"
+          >{{ genre.name }}</a
+        >
+      </mat-menu>
+      <a routerLink="/popular">New & Popular</a>
     </div>
     <div class="smallScreen">
       <span
@@ -36,31 +48,52 @@
         <span class="material-icons">menu</span>
       </span>
       <mat-menu #smallNavBar="matMenu">
-        <a mat-menu-item routerLink="/tvShow">TV Shows</a>
-        <a mat-menu-item routerLink="/movies">Movies</a>
-        <a mat-menu-item routerLink="/popular">New & Popular</a>
         <span
-          mat-menu-item
           class="openGenres"
-          [matMenuTriggerFor]="genresMenu"
+          [matMenuTriggerFor]="genresTvShows"
           aria-label="open--genres-label"
+          mat-menu-item
         >
-          Genres
+          TV Shows
         </span>
 
         <mat-menu
-          #genresMenu="matMenu"
+          #genresTvShows="matMenu"
           class="list-horizontal"
           xPosition="before"
         >
           <a
             class="horizontal-item"
-            *ngFor="let genre of listOfGenre"
+            *ngFor="let genre of listOfTvShowGenre"
             mat-list-item
             [routerLink]="'/search/' + genre.id"
             >{{ genre.name }}</a
           >
         </mat-menu>
+
+        <span
+          mat-menu-item
+          class="openGenres"
+          [matMenuTriggerFor]="genresMovie"
+          aria-label="open--genres-label"
+        >
+          Movies
+        </span>
+
+        <mat-menu
+          #genresMovie="matMenu"
+          class="list-horizontal"
+          xPosition="before"
+        >
+          <a
+            class="horizontal-item"
+            *ngFor="let genre of listOfMovieGenre"
+            mat-list-item
+            [routerLink]="'/search/' + genre.id"
+            >{{ genre.name }}</a
+          >
+        </mat-menu>
+        <a mat-menu-item routerLink="/popular">New & Popular</a>
       </mat-menu>
     </div>
   </div>
