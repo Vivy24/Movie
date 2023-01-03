@@ -3,11 +3,11 @@ export interface Genre {
     name: string;
 }
 
-export interface IMDBInfo {
-    id: string;
-    rating: number;
-    voteCount: number;
-}
+// export interface IMDBInfo {
+//     id: string;
+//     rating: number;
+//     voteCount: number;
+// }
 
 export interface streamInfo {
     type: string;
@@ -15,15 +15,18 @@ export interface streamInfo {
 }
 
 export interface Movie {
-    age: number;
-    backdropImage: string;
-    cast: Array<string>;
-    genres: Array<Genre>;
-    imdb: IMDBInfo;
+    id: number // movie id
+    adult: boolean;
+    backdropImage: string; // need to concat with https://image.tmdb.org/t/p/original
+    posterImage: string;  // need to concat with https://image.tmdb.org/t/p/original
     title: string;
     overview: string;
-    posterImage: string;
-    year: number;
-    streamSection: Array<streamInfo>
+    release_date: string;
+    languages: string;
+    genres: Array<number>; // store genre ID 
+    streamSection?: Array<streamInfo>,
+    vote_average: number;
+    vote_count: number;
+    popularity: number;
 }
 

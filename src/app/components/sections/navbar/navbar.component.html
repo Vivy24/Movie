@@ -15,7 +15,7 @@
           class="horizontal-item"
           *ngFor="let genre of listOfTvShowGenre"
           mat-list-item
-          [routerLink]="'/search/' + genre.id"
+          [routerLink]="'genres/tvshows/' + genre.id + '/1/'"
           >{{ genre.name }}</a
         >
       </mat-menu>
@@ -33,7 +33,7 @@
           class="horizontal-item"
           *ngFor="let genre of listOfMovieGenre"
           mat-list-item
-          [routerLink]="'/search/' + genre.id"
+          [routerLink]="'genres/movies/' + genre.id + '/1/'"
           >{{ genre.name }}</a
         >
       </mat-menu>
@@ -66,7 +66,7 @@
             class="horizontal-item"
             *ngFor="let genre of listOfTvShowGenre"
             mat-list-item
-            [routerLink]="'/search/' + genre.id"
+            [routerLink]="'genres/tvshows/' + genre.id + '/1/'"
             >{{ genre.name }}</a
           >
         </mat-menu>
@@ -89,7 +89,7 @@
             class="horizontal-item"
             *ngFor="let genre of listOfMovieGenre"
             mat-list-item
-            [routerLink]="'/search/' + genre.id"
+            [routerLink]="'genres/movies/' + genre.id + '/1/'"
             >{{ genre.name }}</a
           >
         </mat-menu>

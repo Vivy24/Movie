@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, QueryList, ViewChildren } from '@angul
 import { MatMenuTrigger } from '@angular/material/menu';
 import { filter } from 'rxjs';
 import { Genre } from 'src/app/models/model';
-import { MoviesService } from 'src/app/services/movies.service';
+import { GenresService } from 'src/app/services/genres.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,20 +14,20 @@ export class NavbarComponent implements OnInit {
   listOfMovieGenre: Array<Genre> = [];
   listOfTvShowGenre: Array<Genre> = [];
   constructor(
-    private moviesService: MoviesService
+    private genresService: GenresService
   ) { }
 
   ngOnInit(): void {
     if (this.listOfMovieGenre.length == 0) {
-      this.moviesService.getMovieGenres();
+      this.genresService.getMovieGenres();
     }
 
     if (this.listOfTvShowGenre.length == 0) {
-      this.moviesService.getTvShowGenres();
+      this.genresService.getTvShowGenres();
     }
 
     // subscribe to the movie genre list
-    this.moviesService.listOfMovieGenres$.pipe(filter(genre => !!genre)).subscribe({
+    this.genresService.listOfMovieGenres$.pipe(filter(genre => !!genre)).subscribe({
       next: genre => {
         this.listOfMovieGenre = genre
       },
@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
       }
     })
 
-    this.moviesService.listOfTvShowGenres$.pipe(filter(genre => !!genre)).subscribe({
+    this.genresService.listOfTvShowGenres$.pipe(filter(genre => !!genre)).subscribe({
       next: genre => {
         this.listOfTvShowGenre = genre
       },

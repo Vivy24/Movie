@@ -1,40 +1,44 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Genre } from "../models/model"
+import { Movie } from '../models/model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
-  listOfMovieGenres$: BehaviorSubject<Array<Genre>> = new BehaviorSubject<Array<Genre>>([]);
-  listOfTvShowGenres$: BehaviorSubject<Array<Genre>> = new BehaviorSubject<Array<Genre>>([]);
+  movies$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   apiKey: string = environment.HTTP_API_KEY;
 
-  constructor(
-    private httpClient: HttpClient
+  constructor(private httpClient: HttpClient
   ) { }
 
-  // Send GET to the API to get movie's genres
-  public getMovieGenres() {
-    this.httpClient.get<any>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=en-US`, {
+  public getMoviesByGenre(type: string, genreID: string, page = 1) {
+    this.httpClient.get<any>(`https://api.themoviedb.org/3/discover/${type}?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, {
     }).subscribe({
       next: data => {
-        this.listOfMovieGenres$.next(data.genres as Array<Genre>)
-      },
-      error: error => {
-        console.log(error);
-      }
-    })
-  }
 
-  // Send GET to the API to get tvShow's genres
+        const formattedMovie: Array<Movie> = data.results.map((movie: any) => {
+          const formatMovie: Movie = {
+            id: movie.id,
+            adult: movie.adult,
+            backdropImage: movie.backdrop_path,
+            posterImage: movie.poster_path,
+            title: movie.original_title,
+            overview: movie.overview,
+            release_date: movie.release_date,
+            languages: movie.original_language,
+            genres: movie.genre_ids,
+            vote_average: movie.vote_average,
+            vote_count: movie.vote_count,
+            popularity: movie.popularity
+          }
+          return formatMovie;
+        })
 
-  public getTvShowGenres() {
-    this.httpClient.get<any>(`https://api.themoviedb.org/3/genre/tv/list?api_key=${this.apiKey}&language=en-US`, {
-    }).subscribe({
-      next: data => {
-        this.listOfTvShowGenres$.next(data.genres as Array<Genre>)
+        this.movies$.next(formattedMovie)
+        // this.listOfMovieGenres = data.genres as Array<Genre>
       },
       error: error => {
         console.log(error);
