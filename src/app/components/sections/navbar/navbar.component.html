@@ -5,6 +5,27 @@
       <a routerLink="/tvShow">TV Shows</a>
       <a routerLink="/movies">Movies</a>
       <a routerLink="/popular">New & Popular</a>
+      <span
+        class="openGenres"
+        [matMenuTriggerFor]="genresMenu"
+        aria-label="open-genres-label"
+      >
+        Genres
+      </span>
+
+      <mat-menu
+        #genresMenu="matMenu"
+        class="list-horizontal"
+        xPosition="before"
+      >
+        <a
+          class="horizontal-item"
+          *ngFor="let genre of listOfGenre"
+          mat-list-item
+          [routerLink]="'/search/' + genre.id"
+          >{{ genre.name }}</a
+        >
+      </mat-menu>
     </div>
     <div class="smallScreen">
       <span
@@ -18,6 +39,28 @@
         <a mat-menu-item routerLink="/tvShow">TV Shows</a>
         <a mat-menu-item routerLink="/movies">Movies</a>
         <a mat-menu-item routerLink="/popular">New & Popular</a>
+        <span
+          mat-menu-item
+          class="openGenres"
+          [matMenuTriggerFor]="genresMenu"
+          aria-label="open--genres-label"
+        >
+          Genres
+        </span>
+
+        <mat-menu
+          #genresMenu="matMenu"
+          class="list-horizontal"
+          xPosition="before"
+        >
+          <a
+            class="horizontal-item"
+            *ngFor="let genre of listOfGenre"
+            mat-list-item
+            [routerLink]="'/search/' + genre.id"
+            >{{ genre.name }}</a
+          >
+        </mat-menu>
       </mat-menu>
     </div>
   </div>

@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { AddtoFavComponent } from './components/pages/Page/List/addto-fav/addto-fav.component';
 import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-movie.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-mo
     SlideshowComponent,
     PageNotFoundComponent,
     AddtoFavComponent,
-    AddMovieComponent
+    AddMovieComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,8 @@ import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-mo
     MatToolbarModule,
     MatListModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
