@@ -19,9 +19,11 @@ import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-mo
 import { HttpClientModule } from '@angular/common/http';
 import { LandingCardComponent } from './components/sections/landing-card/landing-card.component';
 import { ItemCardComponent } from './components/sections/item-card/item-card.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { GenreSearchComponent } from './components/pages/genre-search/genre-search.component';
-import { MovieSectionComponent } from './components/sections/movie-section/movie-section.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -35,10 +37,11 @@ import { MovieSectionComponent } from './components/sections/movie-section/movie
     AddMovieComponent,
     LandingCardComponent,
     ItemCardComponent,
-
     GenreSearchComponent,
-     MovieSectionComponent,
+
   ],
+  providers: [],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,9 +51,29 @@ import { MovieSectionComponent } from './components/sections/movie-section/movie
     MatListModule,
     MatSidenavModule,
     MatIconModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    HttpClientModule,
+    MatButtonModule,
+    MatTooltipModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      animation: false,
+      radius: 60,
+      space: -10,
+      title: "auto",
+      subtitle: "user scores",
+      outerStrokeWidth: 10,
+      innerStrokeWidth: 10,
+      renderOnClick: false,
+      outerStrokeColor: "#5c5c5c",
+      innerStrokeColor: "#d7d7d7",
+      responsive: true,
+      titleFontSize: "25px",
+      subtitleFontSize: "15px",
+      subtitleFontWeight: "700",
+      subtitleColor: "#5c5c5c",
+      showUnits: true,
+    })
+
+  ]
 })
 export class AppModule { }

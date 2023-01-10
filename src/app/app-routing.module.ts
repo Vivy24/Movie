@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GenreSearchComponent } from './components/pages/genre-search/genre-search.component';
 import { MainpageComponent } from './components/pages/mainpage/mainpage.component';
+import { MovieDetailsComponent } from './components/pages/movie-details/movie-details.component';
 import { MylistComponent } from './components/pages/mylist/mylist.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-movie.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: "addToFavList", component: AddtoFavComponent },
   { path: "addNewMovie", component: AddMovieComponent },
   { path: "genres/:type/:id/:page", component: GenreSearchComponent },
+  { path: "movies/details/:id", component: MovieDetailsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

@@ -1,1 +1,15 @@
-<p>item-card works!</p>
+<div
+  [routerLink]="'/movies/details/' + movie.id"
+  *ngIf="movie != null"
+  class="movie"
+>
+  <img [src]="movie.posterImage" />
+
+  <div class="description">
+    <p>
+      {{ movie.title }} <br />
+      View: {{ movie.popularity }}<br />
+      Release Date: {{ movie.release_date }}
+    </p>
+  </div>
+</div>

@@ -14,19 +14,38 @@ export interface streamInfo {
     link: string;
 }
 
+export interface ProductionCompanies {
+    logo_path?: string; // need to concat with https://image.tmdb.org/t/p/original
+    name?: string;
+    country?: string;
+}
+
 export interface Movie {
     id: number // movie id
     adult: boolean;
     backdropImage: string; // need to concat with https://image.tmdb.org/t/p/original
     posterImage: string;  // need to concat with https://image.tmdb.org/t/p/original
     title: string;
-    overview: string;
+    overview?: string;
     release_date: string;
     languages: string;
-    genres: Array<number>; // store genre ID 
-    streamSection?: Array<streamInfo>,
     vote_average: number;
     vote_count: number;
     popularity: number;
 }
 
+export interface MovieDetail {
+    genres: Array<Genre>;
+    homepage?: string;
+    country?: string;
+    status?: string;
+    tagline?: string;
+    productions: Array<ProductionCompanies>;
+    streamSection?: Array<streamInfo>,
+
+}
+
+export interface Trailer {
+    source: string;     // need to concat key with https://www.youtube.com/watch?v=qtVobvo7AVo 
+    type: string;
+}
