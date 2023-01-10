@@ -1,9 +1,29 @@
-.movie {
+.mat-card {
     width: 180px;
 
-    img {
-        width: 180px;
-        display: block;
+    .mat-card-image {
+        margin-bottom: 0 !important;
     }
 
+    .mat-card-actions {
+        width: 100%;
+        text-align: center;
+    }
+
+    .content {
+        padding: none;
+        margin: none;
+
+        h3 {
+            font-size: 1em;
+            font-weight: 500;
+            margin-bottom: 0 !important;
+        }
+
+        p {
+            margin-bottom: 0.2em !important;
+            font-size: 0.8em;
+        }
+
+    }
 }

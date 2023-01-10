@@ -21,6 +21,7 @@ import { LandingCardComponent } from './components/sections/landing-card/landing
 import { ItemCardComponent } from './components/sections/item-card/item-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 
 import { GenreSearchComponent } from './components/pages/genre-search/genre-search.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -54,6 +55,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     HttpClientModule,
     MatButtonModule,
     MatTooltipModule,
+    MatCardModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       animation: false,
