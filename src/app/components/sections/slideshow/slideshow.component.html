@@ -1,1 +1,17 @@
-<p>slideshow works!</p>
+<div class="slideshow">
+  <h3>{{ movieCategory }}</h3>
+  <carousel
+    [arrowsOutside]="true"
+    [height]="350"
+    [cellsToShow]="this.numberOfCells"
+    [margin]="10"
+    [arrowsTheme]="'dark'"
+    class="carousel"
+    [autoplay]="true"
+    [autoplayInterval]="2000"
+  >
+    <div *ngFor="let movie of this.movieList" class="carousel-cell">
+      <app-item-card [movie]="movie"></app-item-card>
+    </div>
+  </carousel>
+</div>

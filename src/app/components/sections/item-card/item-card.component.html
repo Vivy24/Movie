@@ -1,15 +1,14 @@
-<mat-card
+<div
   [routerLink]="'/movies/details/' + movie.id"
   *ngIf="movie != null"
   class="movie"
 >
-  <img mat-card-image alt="Movie poster" [src]="movie.posterImage" />
+  <mat-card>
+    <img mat-card-image alt="Movie poster" [src]="movie.posterImage" />
+  </mat-card>
+
   <div class="content">
     <h3>{{ movie.title }}</h3>
     <p>View: {{ movie.popularity }}</p>
   </div>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SAVE</button>
-  </mat-card-actions>
-</mat-card>
+</div>

@@ -1,0 +1,45 @@
+.slideshow {
+    margin: 0 auto;
+    width: 90%;
+
+    h3 {
+        font-size: 1.75em;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        // background-color: #5c5c5c;
+        width: fit-content;
+        padding: 5px;
+        display: block;
+        font-weight: 500;
+    }
+}
+
+
+::ng-deep .carousel {
+    // background-color: red;
+    padding: 1em;
+    padding-left: 2.5em;
+    border-radius: 5px;
+
+    .carousel-dot {
+        border: 1px solid #777 !important;
+    }
+
+    .carousel-dot-active {
+        background-color: #777 !important;
+    }
+
+    .carousel-arrow {
+        background-color: #777 !important;
+    }
+}
+
+
+
+.carousel-cell {
+    padding-top: 1em;
+
+    &:first-child {
+        margin-left: 1em !important;
+    }
+}

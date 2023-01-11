@@ -22,6 +22,7 @@ import { ItemCardComponent } from './components/sections/item-card/item-card.com
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
+import { IvyCarouselModule } from 'carousel-angular';
 
 import { GenreSearchComponent } from './components/pages/genre-search/genre-search.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -56,6 +57,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     MatButtonModule,
     MatTooltipModule,
     MatCardModule,
+    IvyCarouselModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       animation: false,

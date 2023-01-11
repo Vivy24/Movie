@@ -4,8 +4,10 @@
     [movieDetail]="this.latestMovieDetail"
   ></app-landing-card>
 
-  <app-item-card [movie]="this.latestMovie"></app-item-card>
   <div class="trendingMovies">
-    <app-slideshow [movieList]="this.trendingMoviesList"></app-slideshow>
+    <app-slideshow
+      [movieCategory]="'Trending Movies'"
+      [movieList]="this.trendingMoviesList"
+    ></app-slideshow>
   </div>
 </div>

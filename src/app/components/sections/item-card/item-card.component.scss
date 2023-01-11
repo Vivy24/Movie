@@ -1,29 +1,59 @@
 .mat-card {
-    width: 180px;
-
-    .mat-card-image {
-        margin-bottom: 0 !important;
-    }
+    background-color: black;
+    width: 150px;
+    padding: 0;
+    margin: 0;
 
     .mat-card-actions {
         width: 100%;
         text-align: center;
     }
 
-    .content {
-        padding: none;
-        margin: none;
-
-        h3 {
-            font-size: 1em;
-            font-weight: 500;
-            margin-bottom: 0 !important;
-        }
-
-        p {
-            margin-bottom: 0.2em !important;
-            font-size: 0.8em;
-        }
-
+    img {
+        width: 100% !important;
+        margin: 0;
     }
+
+
+
+    @media(min-width: 800px) {
+        .content {
+            padding: 1em;
+
+            h3 {
+                font-size: 1.25em;
+            }
+
+
+
+            p {
+                margin-bottom: 0.2em !important;
+                font-size: 1.25em;
+            }
+
+        }
+    }
+
+}
+
+.content {
+    color: black;
+    padding: 0 5px;
+    margin: none;
+    width: 150px;
+
+    h3 {
+        font-size: 1em;
+        word-break: break-word;
+        font-weight: 500;
+        margin-bottom: 0 !important;
+    }
+
+
+
+    p {
+        margin-bottom: 0.2em !important;
+        font-size: 0.8em;
+    }
+
 }
