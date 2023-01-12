@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Genre, Movie, MovieDetail } from '../models/model';
+import { Genre, Movie, MovieDetail, movieType } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +30,9 @@ export class MoviesService {
   constructor(private httpClient: HttpClient
   ) { }
 
-  public getMoviesByTrending() {
-    this.httpClient.get<any>(`https://api.themoviedb.org/3/trending/all/week?api_key=${this.apiKey}`, {
+
+  private getMovie(url: string, variable: any) {
+    this.httpClient.get<any>(url, {
     }).subscribe({
       next: data => {
         const formattedMovie: Array<Movie> = data.results.map((movie: any) => {
@@ -46,49 +47,27 @@ export class MoviesService {
             languages: movie.original_language,
             vote_average: movie.vote_average,
             vote_count: movie.vote_count,
-            popularity: movie.popularity
+            popularity: movie.popularity,
+            type: movieType.Movie,
           }
           return formatMovie;
         })
 
-        this.trendingWeekMovie$.next(formattedMovie)
+        variable.next(formattedMovie)
       },
       error: error => {
         console.log(error);
       }
     })
   }
+  public getMoviesByTrending() {
+    this.getMovie(`https://api.themoviedb.org/3/trending/all/week?api_key=${this.apiKey}`, this.trendingWeekMovie$);
+  }
 
 
 
   public getMoviesByGenre(type: string, genreID: string, page = 1) {
-    this.httpClient.get<any>(`https://api.themoviedb.org/3/discover/${type}?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, {
-    }).subscribe({
-      next: data => {
-
-        const formattedMovie: Array<Movie> = data.results.map((movie: any) => {
-          const formatMovie: Movie = {
-            id: movie.id,
-            adult: movie.adult,
-            backdropImage: `${environment.HTTP_ORIGINAL_IMAGE}${movie.backdrop_path}`,
-            posterImage: `${environment.HTTP_ORIGINAL_IMAGE}${movie.poster_path}`,
-            title: movie.original_title,
-            release_date: movie.release_date,
-            languages: movie.original_language,
-            vote_average: movie.vote_average,
-            vote_count: movie.vote_count,
-            popularity: movie.popularity
-          }
-          return formatMovie;
-        })
-
-        this.movies$.next(formattedMovie)
-        // this.listOfMovieGenres = data.genres as Array<Genre>
-      },
-      error: error => {
-        console.log(error);
-      }
-    })
+    this.getMovie(`https://api.themoviedb.org/3/discover/${type}?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, this.movies$);
   }
 
   public getMovieDetailByMovie(movieID: string) {

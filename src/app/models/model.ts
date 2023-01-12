@@ -1,3 +1,8 @@
+export enum movieType {
+    Movie,
+    Tvshow,
+
+}
 export interface Genre {
     id: number;
     name: string;
@@ -32,6 +37,7 @@ export interface Movie {
     vote_average: number;
     vote_count: number;
     popularity: number;
+    type: movieType;
 }
 
 export interface MovieDetail {
@@ -49,3 +55,4 @@ export interface Trailer {
     source: string;     // need to concat key with https://www.youtube.com/watch?v=qtVobvo7AVo 
     type: string;
 }
+

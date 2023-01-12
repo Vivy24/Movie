@@ -1,3 +1,5 @@
+import { movieType } from "src/app/models/model"
+
 export const sampleMovie = {
     adult: false,
     backdropImage: "https://image.tmdb.org/t/p/original/5gPQKfFJnl8d1edbkOzKONo4mnr.jpg",
@@ -9,6 +11,7 @@ export const sampleMovie = {
     title: "Avatar: The Way of Water",
     vote_average: 7.7,
     vote_count: 3497,
+    type: movieType.Movie,
 }
 
 

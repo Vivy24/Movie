@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Movie } from 'src/app/models/model';
 
 @Component({
@@ -7,13 +7,22 @@ import { Movie } from 'src/app/models/model';
   styleUrls: ['./slideshow.component.scss']
 })
 export class SlideshowComponent implements OnInit {
-  @Input() movieCategory?: String
+  @Input() title?: String
   @Input() movieList?: Array<Movie>
+  @Input() tvShowList?: Array<Movie>
+  renderMoviesList?: Array<Movie>;
   innerWidth?: number;
   numberOfCells: number = 0;
   constructor() { }
 
   ngOnInit(): void {
+    this.renderMoviesList = this.movieList;
+    this.setNumberOfCells();
+
+  }
+
+  setNumberOfCells = () => {
+
     this.innerWidth = window.innerWidth;
     if (this.innerWidth < 350) {
       this.numberOfCells = 2;
@@ -28,4 +37,14 @@ export class SlideshowComponent implements OnInit {
       this.numberOfCells = 5;
     }
   }
+
+
+  onValChange = (value: any) => {
+    this.renderMoviesList = value == 'movie' ? this.movieList : this.tvShowList;
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.setNumberOfCells();
+  }
+
 }

@@ -4,10 +4,11 @@
     [movieDetail]="this.latestMovieDetail"
   ></app-landing-card>
 
-  <div class="trendingMovies">
+  <div class="trendingMovies" *ngIf="this.trendingMoviesList.length > 0">
     <app-slideshow
-      [movieCategory]="'Trending Movies'"
+      [title]="'Trending Movies'"
       [movieList]="this.trendingMoviesList"
+      [tvShowList]="this.trendingTvshowsList"
     ></app-slideshow>
   </div>
 </div>

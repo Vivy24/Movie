@@ -1,5 +1,15 @@
 <div class="slideshow">
-  <h3>{{ movieCategory }}</h3>
+  <div class="description">
+    <h3 *ngIf="this.title">{{ this.title }}</h3>
+    <mat-button-toggle-group name="tvshowMovieToggle" aria-label="Font Style">
+      <mat-button-toggle (change)="onValChange($event.value)" value="movie"
+        >Movie</mat-button-toggle
+      >
+      <mat-button-toggle (change)="onValChange($event.value)" value="tvshow">
+        Tv Show</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>
   <carousel
     [arrowsOutside]="true"
     [height]="350"
@@ -10,7 +20,7 @@
     [autoplay]="true"
     [autoplayInterval]="2000"
   >
-    <div *ngFor="let movie of this.movieList" class="carousel-cell">
+    <div *ngFor="let movie of this.renderMoviesList" class="carousel-cell">
       <app-item-card [movie]="movie"></app-item-card>
     </div>
   </carousel>
