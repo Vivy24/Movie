@@ -9,6 +9,8 @@ import { Movie, movieType } from '../models/model';
 })
 export class TvshowService {
   trendingWeekTvshow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
+  onAirTvShow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
+  topRatedTvShow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   apiKey: string = environment.HTTP_API_KEY;
 
   constructor(private httpClient: HttpClient) { }
@@ -46,5 +48,12 @@ export class TvshowService {
     this.getTvshow(`https://api.themoviedb.org/3/tv/popular?api_key=${this.apiKey}&language=en-US&page=1`, this.trendingWeekTvshow$)
   }
 
+  public getTvShowsByOnAir() {
+    this.getTvshow(`https://api.themoviedb.org/3/tv/on_the_air?api_key=${this.apiKey}&language=en-US&page=1`, this.onAirTvShow$)
+  }
+
+  public getTvShowByTopRated() {
+    this.getTvshow(`https://api.themoviedb.org/3/tv/top_rated?api_key=${this.apiKey}&language=en-US&page=1`, this.topRatedTvShow$)
+  }
 
 }

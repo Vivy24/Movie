@@ -6,9 +6,25 @@
 
   <div class="trendingMovies" *ngIf="this.trendingMoviesList.length > 0">
     <app-slideshow
-      [title]="'Trending Movies'"
+      [title]="'Trending & Popular'"
       [movieList]="this.trendingMoviesList"
       [tvShowList]="this.trendingTvshowsList"
+    ></app-slideshow>
+  </div>
+
+  <div class="onAir" *ngIf="this.onAirMoviesList.length > 0">
+    <app-slideshow
+      [title]="'On Air'"
+      [movieList]="this.onAirMoviesList"
+      [tvShowList]="this.onAirTvShowsList"
+    ></app-slideshow>
+  </div>
+
+  <div class="topRated" *ngIf="this.topRatedMovieList.length > 0">
+    <app-slideshow
+      [title]="'Top Rated'"
+      [movieList]="this.topRatedMovieList"
+      [tvShowList]="this.topRatedTvShowList"
     ></app-slideshow>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Genre, Movie, MovieDetail, movieType } from '../models/model';
+import { Movie, MovieDetail, movieType } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +64,13 @@ export class MoviesService {
     this.getMovie(`https://api.themoviedb.org/3/trending/all/week?api_key=${this.apiKey}`, this.trendingWeekMovie$);
   }
 
+  public getMoviesByNowPlaying() {
+    this.getMovie(`https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=1`, this.nowPlayingMovie$);
+  }
 
+  public getMovieByTopRated() {
+    this.getMovie(`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US&page=1`, this.topRatedMovie$);
+  }
 
   public getMoviesByGenre(type: string, genreID: string, page = 1) {
     this.getMovie(`https://api.themoviedb.org/3/discover/${type}?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, this.movies$);
