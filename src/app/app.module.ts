@@ -27,6 +27,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { GenreSearchComponent } from './components/pages/genre-search/genre-search.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { PaginatorComponent } from './components/sections/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     LandingCardComponent,
     ItemCardComponent,
     GenreSearchComponent,
+    PaginatorComponent,
 
   ],
   providers: [],

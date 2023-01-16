@@ -1,0 +1,48 @@
+:host {
+    display: block;
+}
+
+nav {
+    margin: 0 auto;
+    width: fit-content;
+    background-color: transparent
+}
+
+
+.navlinks {
+    display: inline-flex;
+}
+
+.navlinks li {
+    margin-right: 0;
+    margin-left: -1px;
+    list-style: none;
+
+    &:first-child .navlink {
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+    }
+
+    &:last-child .navlink {
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+}
+
+.navlink {
+    margin-left: 0;
+    border-width: 1px;
+    background-color: white;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
+
+    &:hover {
+        background-color: rgb(243 244 246);
+        color: rgb(55 65 81);
+    }
+
+    &.active {
+        background-color: rgb(220, 222, 226);
+        color: rgb(55 65 81);
+    }
+}

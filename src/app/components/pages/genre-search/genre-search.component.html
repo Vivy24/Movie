@@ -1,1 +1,10 @@
-<app-item-card [movie]="sampleMovie"></app-item-card>
+<div>
+  <app-paginator [type]="this.type" [genreId]="this.genreId"></app-paginator>
+  <div class="movieList">
+    <app-item-card
+      class="genreMovie"
+      *ngFor="let movie of this.listOfMovie"
+      [movie]="movie"
+    ></app-item-card>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<nav aria-label="Page navigation">
+  <ul class="navlinks">
+    <li
+      (click)="this.updateFirst()"
+      *ngIf="showFirstLastButton"
+      [routerLink]="'/' + routerLinkBase + '/' + type + '/' + genreId + '/1/'"
+    >
+      <a class="navlink"> First </a>
+    </li>
+    <li
+      (click)="this.updatePrevious()"
+      *ngIf="currentPage > 1"
+      [routerLink]="
+        '/' +
+        routerLinkBase +
+        '/' +
+        type +
+        '/' +
+        genreId +
+        '/' +
+        previousPage +
+        '/'
+      "
+    >
+      <a class="navlink"> Prev </a>
+    </li>
+
+    <li
+      [routerLink]="
+        '/' + routerLinkBase + '/' + type + '/' + genreId + '/' + page + '/'
+      "
+      (click)="this.updateCurrentPage($event)"
+      *ngFor="let page of this.showingPage"
+    >
+      <a class="navlink">
+        {{ page }}
+      </a>
+    </li>
+
+    <li
+      (click)="this.updateNext()"
+      [routerLink]="
+        '/' + routerLinkBase + '/' + type + '/' + genreId + '/' + nextPage + '/'
+      "
+    >
+      <a class="navlink"> Next > </a>
+    </li>
+    <li
+      (click)="this.updateLast()"
+      [routerLink]="'/' + routerLinkBase + '/' + type + '/' + genreId + '/500/'"
+    >
+      <a class="navlink"> Last </a>
+    </li>
+  </ul>
+</nav>

@@ -72,8 +72,8 @@ export class MoviesService {
     this.getMovie(`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US&page=1`, this.topRatedMovie$);
   }
 
-  public getMoviesByGenre(type: string, genreID: string, page = 1) {
-    this.getMovie(`https://api.themoviedb.org/3/discover/${type}?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, this.movies$);
+  public getMoviesByGenre(genreID: string, page = 1) {
+    this.getMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, this.movies$);
   }
 
   public getMovieDetailByMovie(movieID: string) {
