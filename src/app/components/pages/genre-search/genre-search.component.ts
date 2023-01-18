@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
 import { Movie } from 'src/app/models/model';
 import { MoviesService } from 'src/app/services/movies.service';
+import { TvshowService } from 'src/app/services/tvshow.service';
 import { sampleMovie } from 'src/mockedData/movie';
 
 @Component({
@@ -15,8 +16,9 @@ export class GenreSearchComponent implements OnInit {
   listOfMovie: Array<Movie> = [];
   type?: string;
   genreId: string = "";
-  page?: number;
-  constructor(route: ActivatedRoute, private moviesService: MoviesService) {
+  page?: number = 1;
+  routerLinkBase: string = ""
+  constructor(route: ActivatedRoute, private moviesService: MoviesService, private tvShowService: TvshowService) {
     route.params
       .subscribe(
         (val) => {
@@ -27,9 +29,9 @@ export class GenreSearchComponent implements OnInit {
             this.moviesService.getMoviesByGenre(this.genreId, this.page);
 
           }
-          // else {
-          //   this.moviesService.getMoviesByGenre(genreId, page);
-          // }
+          else {
+            this.tvShowService.getTvShowByGenre(this.genreId, this.page);
+          }
         }
       );
   }
@@ -43,6 +45,16 @@ export class GenreSearchComponent implements OnInit {
       },
       error: error => {
         console.log(error);
+      }
+    })
+
+    this.tvShowService.tvShow$.pipe(filter(tvshow => !!tvshow)).subscribe({
+      next: listOfTvShow => {
+        console.log(listOfTvShow)
+        this.listOfMovie = listOfTvShow
+      },
+      error: error => {
+        console.log(error)
       }
     })
   }

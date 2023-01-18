@@ -15,8 +15,8 @@ export class PaginatorComponent implements OnInit {
   @Input() genreId?: string;
   @Input() showFirstLastButton = true
   @Input() routerLinkBase: string = 'genres';
-  previousPage = this.currentPage - 1;
-  nextPage = this.currentPage + 1;
+  previousPage: number = this.currentPage - 1;
+  nextPage: number = this.currentPage + 1;
   showingPage: Array<number> = Array.from({ length: 10 }, (_, i) => i + 1)
   constructor() { }
 
@@ -38,10 +38,7 @@ export class PaginatorComponent implements OnInit {
     this.showingPage = Array.from({ length: 10 }, (_, i) => i + + 491);
   }
 
-  updateCurrentPage(event: any) {
-    this.currentPage = event.srcElement.innerText >= 500 ? 500 : event.srcElement.innerText;
-    this.previousPage = this.currentPage - 1;
-    this.nextPage = this.currentPage + 1;
+  updateShowPage() {
 
     if (this.currentPage > this.windowSize) {
       this.showingPage = this.numberArray.slice(+this.currentPage - +this.windowSize, +this.currentPage + +this.windowSize)
@@ -49,30 +46,29 @@ export class PaginatorComponent implements OnInit {
     else if (this.currentPage < this.windowSize) {
       this.showingPage = Array.from({ length: 10 }, (_, i) => i + 1);
     }
+  }
+  updateCurrentPage(event: any) {
+    this.currentPage = event.srcElement.innerText >= 500 ? 500 : event.srcElement.innerText;
+    this.previousPage = this.currentPage - 1;
+    this.nextPage = +this.currentPage + 1;
+    this.updateShowPage();
 
   }
 
   updatePrevious() {
-    this.currentPage = this.previousPage <= 1 ? 1 : this.previousPage
-    this.previousPage = this.currentPage - 1;
-    this.nextPage = this.currentPage + 1;
-    if (this.currentPage > this.windowSize) {
-      this.showingPage = this.numberArray.slice(+this.currentPage - +this.windowSize, +this.currentPage + +this.windowSize)
-    }
-    else if (this.currentPage <= this.windowSize) {
-      this.showingPage = Array.from({ length: 10 }, (_, i) => i + 1);
-    }
+    this.currentPage = +this.previousPage <= 1 ? 1 : this.previousPage
+    this.previousPage = +this.currentPage - 1;
+    this.nextPage = +this.currentPage + 1;
+    this.updateShowPage();
+
   }
 
   updateNext() {
-    this.currentPage = this.nextPage >= 500 ? 500 : this.nextPage;
-    this.nextPage = this.currentPage + 1;
-    this.previousPage = this.currentPage - 1;
-    if (this.currentPage > this.windowSize) {
-      this.showingPage = this.numberArray.slice(+this.currentPage - +this.windowSize, +this.currentPage + +this.windowSize)
-    }
-    else if (this.currentPage <= this.windowSize) {
-      this.showingPage = Array.from({ length: 10 }, (_, i) => i + 1);
-    }
+    this.currentPage = +this.nextPage >= 500 ? 500 : +this.nextPage;
+    this.nextPage = +this.currentPage + 1;
+    this.previousPage = +this.currentPage - 1;
+
+    this.updateShowPage();
+
   }
 }

@@ -12,6 +12,7 @@ export class TvshowService {
   onAirTvShow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   topRatedTvShow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   apiKey: string = environment.HTTP_API_KEY;
+  tvShow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
 
   constructor(private httpClient: HttpClient) { }
   private getTvshow(url: string, variable: any) {
@@ -56,4 +57,7 @@ export class TvshowService {
     this.getTvshow(`https://api.themoviedb.org/3/tv/top_rated?api_key=${this.apiKey}&language=en-US&page=1`, this.topRatedTvShow$)
   }
 
+  public getTvShowByGenre(genreID: string, page = 1) {
+    this.getTvshow(`https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, this.tvShow$);
+  }
 }
