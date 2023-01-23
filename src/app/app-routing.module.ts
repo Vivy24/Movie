@@ -17,7 +17,9 @@ const routes: Routes = [
   { path: "addToFavList", component: AddtoFavComponent },
   { path: "addNewMovie", component: AddMovieComponent },
   { path: "genres/:type/:id/:page", component: MovieMoreList, data: { section: "genre" } },
-  { path: "movies/details/:id", component: MovieDetailsComponent },
+  // { path: "movies/details/:id", component: MovieDetailsComponent },
+  { path: ":type/details/:id", component: MovieDetailsComponent },
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

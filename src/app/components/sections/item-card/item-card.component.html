@@ -1,4 +1,4 @@
-<div [routerLink]="'/movies/details/' + movie.id" *ngIf="movie != null">
+<div [routerLink]="'/' + type + '/details/' + movie.id" *ngIf="movie != null">
   <mat-card class="movieCard">
     <img mat-card-image alt="Movie poster" [src]="movie.posterImage" />
   </mat-card>
@@ -8,3 +8,5 @@
     <p>View: {{ movie.popularity }}</p>
   </div>
 </div>
+
+[]

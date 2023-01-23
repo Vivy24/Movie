@@ -1,5 +1,5 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-paginator',
@@ -10,17 +10,18 @@ export class PaginatorComponent implements OnInit {
   numberArray: Array<number> = Array.from({ length: 500 }, (_, i) => i + 1)
   @Input() currentPage: number = 1
   @Input() totalPages = 500
-  @Input() windowSize: number = 5
+  @Input() windowSize: number = 10;
   @Input() type?: string;
   @Input() genreId?: string;
   @Input() showFirstLastButton = true
   @Input() routerLinkBase: string = this.genreId ? 'genres' : '';
   previousPage: number = this.currentPage - 1;
   nextPage: number = this.currentPage + 1;
-  showingPage: Array<number> = Array.from({ length: 10 }, (_, i) => i + 1)
+  showingPage: Array<number> = Array.from({ length: this.windowSize > 1 ? this.windowSize : 1 }, (_, i) => i + 1)
   constructor() { }
 
   ngOnInit(): void {
+    this.setNumberOfWindowSize();
     this.routerLinkBase = this.genreId ? 'genres' : '';
   }
 
@@ -72,4 +73,33 @@ export class PaginatorComponent implements OnInit {
     this.updateShowPage();
 
   }
+
+  setNumberOfWindowSize = () => {
+
+    if (window.innerWidth < 350) {
+      this.windowSize = 2;
+      this.updateShowPage();
+
+    }
+    else if (window.innerWidth < 600) {
+      this.windowSize = 3;
+      this.updateShowPage();
+
+    }
+    else if (window.innerWidth < 750) {
+      this.windowSize = 4;
+      this.updateShowPage();
+
+    }
+    else if (window.innerWidth < 900) {
+      this.windowSize = 5;
+      this.updateShowPage();
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.setNumberOfWindowSize();
+  }
+
 }

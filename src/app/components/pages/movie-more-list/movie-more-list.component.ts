@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
-import { Movie } from 'src/app/models/model';
+import { Movie, movieType } from 'src/app/models/model';
 import { MoviesService } from 'src/app/services/movies.service';
 import { TvshowService } from 'src/app/services/tvshow.service';
 import { sampleMovie } from 'src/mockedData/movie';
@@ -21,7 +21,7 @@ export class MovieMoreList implements OnInit {
   page?: number = 1;
   routerLinkBase: string = ""
   section: string = "";
-  selection?: string;
+  selection: string = "";
   constructor(route: ActivatedRoute, private moviesService: MoviesService, private tvShowService: TvshowService) {
     this.section = route.snapshot.data['section'];
     route.params
@@ -65,6 +65,7 @@ export class MovieMoreList implements OnInit {
 
 
   ngOnInit(): void {
+    this.selection = localStorage!.getItem("selectionType")!;
     this.listOfShowMovie = this.selection == 'movie' ? this.listOfMovie : this.listOfTvShow;
 
     this.moviesService.movies$.pipe(filter(movie => !!movie)).subscribe({
@@ -149,6 +150,7 @@ export class MovieMoreList implements OnInit {
     })
   }
   onValChange = (value: any) => {
+    localStorage.setItem('selectionType', value);
     this.selection = value;
     this.listOfShowMovie = this.selection == 'movie' ? this.listOfMovie : this.listOfTvShow;
   }

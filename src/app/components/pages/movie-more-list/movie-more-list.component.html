@@ -6,12 +6,16 @@
     aria-label="Font Style"
   >
     <mat-button-toggle
-      checked="true"
+      [checked]="this.selection == 'movie'"
       (change)="onValChange($event.value)"
       value="movie"
       >Movie</mat-button-toggle
     >
-    <mat-button-toggle (change)="onValChange($event.value)" value="tvshow">
+    <mat-button-toggle
+      [checked]="this.selection == 'tvshow'"
+      (change)="onValChange($event.value)"
+      value="tvshow"
+    >
       Tv Show</mat-button-toggle
     >
   </mat-button-toggle-group>
@@ -19,6 +23,7 @@
     <app-item-card
       class="genreMovie"
       *ngFor="let movie of this.listOfShowMovie"
+      [type]="selection"
       [movie]="movie"
     ></app-item-card>
   </div>

@@ -10,6 +10,7 @@ import { Movie } from 'src/app/models/model';
 })
 export class ItemCardComponent implements OnInit {
   @Input() movie?: Movie;
+  @Input() type?: string;
   constructor() { }
 
   ngOnInit(): void {

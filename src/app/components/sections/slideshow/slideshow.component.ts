@@ -13,6 +13,7 @@ export class SlideshowComponent implements OnInit {
   renderMoviesList?: Array<Movie>;
   innerWidth?: number;
   numberOfCells: number = 0;
+  type?: string = 'movie';
   constructor() { }
 
   ngOnInit(): void {
@@ -40,7 +41,8 @@ export class SlideshowComponent implements OnInit {
 
 
   onValChange = (value: any) => {
-    this.renderMoviesList = value == 'movie' ? this.movieList : this.tvShowList;
+    this.type = value;
+    this.renderMoviesList = this.type == 'movie' ? this.movieList : this.tvShowList;
   }
   @HostListener('window:resize', ['$event'])
   onResize() {
