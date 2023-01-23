@@ -60,16 +60,16 @@ export class MoviesService {
       }
     })
   }
-  public getMoviesByTrending() {
-    this.getMovie(`https://api.themoviedb.org/3/trending/all/week?api_key=${this.apiKey}`, this.trendingWeekMovie$);
+  public getMoviesByTrending(page = 1) {
+    this.getMovie(`https://api.themoviedb.org/3/trending/all/week?api_key=${this.apiKey}&page=${page}`, this.trendingWeekMovie$);
   }
 
-  public getMoviesByNowPlaying() {
-    this.getMovie(`https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=1`, this.nowPlayingMovie$);
+  public getMoviesByNowPlaying(page = 1) {
+    this.getMovie(`https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=${page}`, this.nowPlayingMovie$);
   }
 
-  public getMovieByTopRated() {
-    this.getMovie(`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US&page=1`, this.topRatedMovie$);
+  public getMovieByTopRated(page = 1) {
+    this.getMovie(`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US&page=${page}`, this.topRatedMovie$);
   }
 
   public getMoviesByGenre(genreID: string, page = 1) {

@@ -25,13 +25,14 @@ import { MatCardModule } from '@angular/material/card';
 import { IvyCarouselModule } from 'carousel-angular';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
-import { GenreSearchComponent } from './components/pages/genre-search/genre-search.component';
+import { MovieMoreList } from './components/pages/movie-more-list/movie-more-list.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { PaginatorComponent } from './components/sections/paginator/paginator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PaginatorComponent,
     MainpageComponent,
     MylistComponent,
     NavbarComponent,
@@ -41,7 +42,7 @@ import { PaginatorComponent } from './components/sections/paginator/paginator.co
     AddMovieComponent,
     LandingCardComponent,
     ItemCardComponent,
-    GenreSearchComponent,
+    MovieMoreList,
     PaginatorComponent,
 
   ],

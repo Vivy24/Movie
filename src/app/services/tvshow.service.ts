@@ -45,16 +45,16 @@ export class TvshowService {
     })
   }
 
-  public getTvshowsByTrending() {
-    this.getTvshow(`https://api.themoviedb.org/3/tv/popular?api_key=${this.apiKey}&language=en-US&page=1`, this.trendingWeekTvshow$)
+  public getTvshowsByTrending(page = 1) {
+    this.getTvshow(`https://api.themoviedb.org/3/tv/popular?api_key=${this.apiKey}&language=en-US&page=${page}`, this.trendingWeekTvshow$)
   }
 
-  public getTvShowsByOnAir() {
-    this.getTvshow(`https://api.themoviedb.org/3/tv/on_the_air?api_key=${this.apiKey}&language=en-US&page=1`, this.onAirTvShow$)
+  public getTvShowsByOnAir(page = 1) {
+    this.getTvshow(`https://api.themoviedb.org/3/tv/on_the_air?api_key=${this.apiKey}&language=en-US&page=${page}`, this.onAirTvShow$)
   }
 
-  public getTvShowByTopRated() {
-    this.getTvshow(`https://api.themoviedb.org/3/tv/top_rated?api_key=${this.apiKey}&language=en-US&page=1`, this.topRatedTvShow$)
+  public getTvShowByTopRated(page = 1) {
+    this.getTvshow(`https://api.themoviedb.org/3/tv/top_rated?api_key=${this.apiKey}&language=en-US&page=${page}`, this.topRatedTvShow$)
   }
 
   public getTvShowByGenre(genreID: string, page = 1) {

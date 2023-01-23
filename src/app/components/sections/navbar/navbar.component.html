@@ -2,6 +2,9 @@
   <div class="left">
     <div class="bigScreen">
       <a routerLink="/home">Home</a>
+      <a routerLink="/popular/1">Popular</a>
+      <a routerLink="/new/1">New</a>
+      <a routerLink="/toprated/1">Top Rated</a>
       <span
         class="openGenres"
         [matMenuTriggerFor]="genresTvShows"
@@ -37,7 +40,6 @@
           >{{ genre.name }}</a
         >
       </mat-menu>
-      <a routerLink="/popular">New & Popular</a>
     </div>
     <div class="smallScreen">
       <span
@@ -48,6 +50,9 @@
         <span class="material-icons">menu</span>
       </span>
       <mat-menu #smallNavBar="matMenu">
+        <a mat-menu-item routerLink="/popular/1">Popular</a>
+        <a mat-menu-item routerLink="/new/1">New</a>
+        <a mat-menu-item routerLink="/toprated/1">Top Rated</a>
         <span
           class="openGenres"
           [matMenuTriggerFor]="genresTvShows"
@@ -93,7 +98,6 @@
             >{{ genre.name }}</a
           >
         </mat-menu>
-        <a mat-menu-item routerLink="/popular">New & Popular</a>
       </mat-menu>
     </div>
   </div>

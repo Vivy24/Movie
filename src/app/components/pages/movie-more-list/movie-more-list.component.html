@@ -1,0 +1,13 @@
+<div>
+  <app-paginator [type]="this.type" [genreId]="this.genreId"></app-paginator>
+
+  <div class="movieList" *ngIf="this.listOfShowMovie.length > 0">
+    <app-item-card
+      class="genreMovie"
+      *ngFor="let movie of this.listOfShowMovie"
+      [movie]="movie"
+    ></app-item-card>
+  </div>
+
+  <p *ngIf="this.listOfShowMovie.length <= 0">No tvshow/movie is show</p>
+</div>

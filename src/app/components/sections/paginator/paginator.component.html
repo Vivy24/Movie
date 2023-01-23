@@ -3,7 +3,11 @@
     <li
       (click)="this.updateFirst()"
       *ngIf="showFirstLastButton"
-      [routerLink]="'/' + routerLinkBase + '/' + type + '/' + genreId + '/1/'"
+      [routerLink]="
+        genreId
+          ? ['/' + routerLinkBase + '/' + type + '/' + genreId + '/1/']
+          : ['/' + routerLinkBase + '/' + type + '/1/']
+      "
     >
       <a class="navlink"> First </a>
     </li>
@@ -11,15 +15,19 @@
       (click)="this.updatePrevious()"
       *ngIf="currentPage > 1"
       [routerLink]="
-        '/' +
-        routerLinkBase +
-        '/' +
-        type +
-        '/' +
-        genreId +
-        '/' +
-        previousPage +
-        '/'
+        genreId
+          ? [
+              '/' +
+                routerLinkBase +
+                '/' +
+                type +
+                '/' +
+                genreId +
+                '/' +
+                previousPage +
+                '/'
+            ]
+          : ['/' + routerLinkBase + '/' + type + '/' + previousPage + '/']
       "
     >
       <a class="navlink"> Prev </a>
@@ -27,7 +35,19 @@
 
     <li
       [routerLink]="
-        '/' + routerLinkBase + '/' + type + '/' + genreId + '/' + page + '/'
+        genreId
+          ? [
+              '/' +
+                routerLinkBase +
+                '/' +
+                type +
+                '/' +
+                genreId +
+                '/' +
+                page +
+                '/'
+            ]
+          : ['/' + routerLinkBase + '/' + type + '/' + page + '/']
       "
       (click)="this.updateCurrentPage($event)"
       *ngFor="let page of this.showingPage"
@@ -40,14 +60,30 @@
     <li
       (click)="this.updateNext()"
       [routerLink]="
-        '/' + routerLinkBase + '/' + type + '/' + genreId + '/' + nextPage + '/'
+        genreId
+          ? [
+              '/' +
+                routerLinkBase +
+                '/' +
+                type +
+                '/' +
+                genreId +
+                '/' +
+                nextPage +
+                '/'
+            ]
+          : ['/' + routerLinkBase + '/' + type + '/' + nextPage + '/']
       "
     >
       <a class="navlink"> Next > </a>
     </li>
     <li
       (click)="this.updateLast()"
-      [routerLink]="'/' + routerLinkBase + '/' + type + '/' + genreId + '/500/'"
+      [routerLink]="
+        genreId
+          ? ['/' + routerLinkBase + '/' + type + '/' + genreId + '/500/']
+          : ['/' + routerLinkBase + '/' + type + '/500/']
+      "
     >
       <a class="navlink"> Last </a>
     </li>

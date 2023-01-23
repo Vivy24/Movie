@@ -14,7 +14,7 @@ export class PaginatorComponent implements OnInit {
   @Input() type?: string;
   @Input() genreId?: string;
   @Input() showFirstLastButton = true
-  @Input() routerLinkBase: string = 'genres';
+  @Input() routerLinkBase: string = this.genreId ? 'genres' : '';
   previousPage: number = this.currentPage - 1;
   nextPage: number = this.currentPage + 1;
   showingPage: Array<number> = Array.from({ length: 10 }, (_, i) => i + 1)
