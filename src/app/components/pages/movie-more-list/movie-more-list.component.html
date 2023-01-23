@@ -1,6 +1,20 @@
 <div>
   <app-paginator [type]="this.type" [genreId]="this.genreId"></app-paginator>
-
+  <mat-button-toggle-group
+    *ngIf="!this.genreId"
+    name="tvshowMovieToggle"
+    aria-label="Font Style"
+  >
+    <mat-button-toggle
+      checked="true"
+      (change)="onValChange($event.value)"
+      value="movie"
+      >Movie</mat-button-toggle
+    >
+    <mat-button-toggle (change)="onValChange($event.value)" value="tvshow">
+      Tv Show</mat-button-toggle
+    >
+  </mat-button-toggle-group>
   <div class="movieList" *ngIf="this.listOfShowMovie.length > 0">
     <app-item-card
       class="genreMovie"

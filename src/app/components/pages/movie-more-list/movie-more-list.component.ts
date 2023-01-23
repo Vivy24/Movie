@@ -21,6 +21,7 @@ export class MovieMoreList implements OnInit {
   page?: number = 1;
   routerLinkBase: string = ""
   section: string = "";
+  selection?: string;
   constructor(route: ActivatedRoute, private moviesService: MoviesService, private tvShowService: TvshowService) {
     this.section = route.snapshot.data['section'];
     route.params
@@ -64,6 +65,8 @@ export class MovieMoreList implements OnInit {
 
 
   ngOnInit(): void {
+    this.listOfShowMovie = this.selection == 'movie' ? this.listOfMovie : this.listOfTvShow;
+
     this.moviesService.movies$.pipe(filter(movie => !!movie)).subscribe({
       next: listOfMovie => {
         this.listOfShowMovie = listOfMovie
@@ -145,5 +148,8 @@ export class MovieMoreList implements OnInit {
       }
     })
   }
-
+  onValChange = (value: any) => {
+    this.selection = value;
+    this.listOfShowMovie = this.selection == 'movie' ? this.listOfMovie : this.listOfTvShow;
+  }
 }
