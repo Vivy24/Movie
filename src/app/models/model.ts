@@ -1,3 +1,5 @@
+import { NumberValueAccessor } from "@angular/forms";
+
 export enum movieType {
     Movie,
     Tvshow,
@@ -56,3 +58,10 @@ export interface Trailer {
     type: string;
 }
 
+export interface Cast {
+    profilePath?: string;
+    character: string;
+    department: string;
+    name: string;
+    id: number;
+}

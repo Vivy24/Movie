@@ -1,1 +1,26 @@
-<p>movie-details works!</p>
+<div *ngIf="this.movieDetail && this.movie">
+  <app-landing-card
+    [movie]="this.movie"
+    [movieDetail]="this.movieDetail"
+    [type]="this.type"
+  ></app-landing-card>
+
+  <div class="castSection">
+    <div class="title">
+      <h2>
+        Cast & Crew
+        <a [routerLink]="'/' + type + '/casts/' + movieId">See Full Casts</a>
+      </h2>
+    </div>
+
+    <div class="castList">
+      <ng-container *ngFor="let cast of castList">
+        <app-cast
+          class="cast"
+          *ngIf="!cast.profilePath?.includes('null')"
+          [castInfo]="cast"
+        ></app-cast>
+      </ng-container>
+    </div>
+  </div>
+</div>

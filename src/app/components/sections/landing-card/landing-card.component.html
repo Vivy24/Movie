@@ -10,7 +10,11 @@
           {{ movie?.release_date }}
           <a
             *ngFor="let genre of movieDetail?.genres"
-            [routerLink]="'genres/movies/' + genre.id + '/1/'"
+            [routerLink]="
+              type == 'movie'
+                ? ['/genres/movies/' + genre.id + '/1/']
+                : ['/genres/tvshow/' + genre.id + '/1/']
+            "
             >&#9679; {{ genre.name }}</a
           >
         </p>

@@ -1,0 +1,46 @@
+.castSection {
+    // display: flex;
+    // justify-content: space-around;
+
+    span {
+        font-size: 0.75em;
+        color: grey;
+    }
+}
+
+.mat-card {
+    margin-top: 20px;
+    width: 150px !important;
+    padding: 0;
+    box-shadow: none;
+    color: black;
+
+    img {
+        margin-right: 20px;
+    }
+
+    background-color: transparent;
+
+    .mat-card-subtitle {
+        color: black;
+    }
+}
+
+.cast .crew {
+    width: fit-content;
+}
+
+.crew {
+    margin-top: 10px;
+}
+
+@media (min-width: 700px) {
+    .crew {
+        margin-top: 0px;
+    }
+
+    .castSection {
+        display: flex;
+        justify-content: space-around;
+    }
+}

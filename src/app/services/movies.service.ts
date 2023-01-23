@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Movie, MovieDetail, movieType } from '../models/model';
+import { Cast, Movie, MovieDetail, movieType } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,24 @@ export class MoviesService {
     productions: [],
     streamSection: [],
   });
+
+  movieSingle$: BehaviorSubject<Movie> = new BehaviorSubject<Movie>({
+    id: 0,
+    adult: false,
+    backdropImage: "",
+    posterImage: "",
+    title: "",
+    overview: "",
+    release_date: "",
+    languages: "",
+    vote_average: 0,
+    vote_count: 0,
+    popularity: 0,
+    type: movieType.Movie
+  })
+
+  movieDetailsCast$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
+  movieDetailCrew$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
 
   constructor(private httpClient: HttpClient
   ) { }
@@ -77,10 +95,9 @@ export class MoviesService {
   }
 
   public getMovieDetailByMovie(movieID: string) {
-    this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${this.apiKey}&language=en-US`, {
-      // 
-    }).subscribe({
+    this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
       next: movieDetail => {
+        console.log(movieDetail)
         // movie;
         const formattedMovieDetail = {
           homepage: movieDetail.homepage,
@@ -97,7 +114,23 @@ export class MoviesService {
           })
         };
 
+        const formattedMovie = {
+          id: movieDetail.id,
+          adult: movieDetail.adult,
+          backdropImage: movieDetail.belongs_to_collection != null ? `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.belongs_to_collection.backdrop_path}` : `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.backdrop_path}`,
+          posterImage: movieDetail.belongs_to_collection != null ? `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.belongs_to_collection.poster_path}` : `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.poster_path}`,
+          title: movieDetail.original_title,
+          overview: movieDetail.overview,
+          release_date: movieDetail.release_date,
+          languages: movieDetail.original_language,
+          vote_average: movieDetail.vote_average,
+          vote_count: movieDetail.vote_count,
+          popularity: movieDetail.popularity,
+          type: movieType.Movie,
+        }
+
         this.movieDetail$.next(formattedMovieDetail)
+        this.movieSingle$.next(formattedMovie)
 
         this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=${this.apiKey}`, {
 
@@ -113,4 +146,41 @@ export class MoviesService {
     })
   }
 
+
+  public getMovieCastById(id: string) {
+    this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
+      next: castList => {
+        const formattedCastList: Array<Cast> = castList.cast.map((cast: any) => {
+          const formattedCast: Cast = {
+            profilePath: `${environment.HTTP_ORIGINAL_IMAGE}${cast.profile_path}`,
+            character: cast.character,
+            department: cast.known_for_department,
+            name: cast.name,
+            id: cast.id,
+          }
+          return formattedCast;
+        })
+        this.movieDetailsCast$.next(formattedCastList)
+      }
+    })
+  }
+
+  public getMovieCrewById(id: string) {
+    this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
+      next: castList => {
+
+        const formattedCrewList: Array<Cast> = castList.crew.map((cast: any) => {
+          const formattedCrew: Cast = {
+            profilePath: `${environment.HTTP_ORIGINAL_IMAGE}${cast.profile_path}`,
+            character: cast.character,
+            department: cast.known_for_department,
+            name: cast.name,
+            id: cast.id,
+          }
+          return formattedCrew;
+        })
+        this.movieDetailCrew$.next(formattedCrewList)
+      }
+    })
+  }
 }

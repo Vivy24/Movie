@@ -28,6 +28,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MovieMoreList } from './components/pages/movie-more-list/movie-more-list.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { PaginatorComponent } from './components/sections/paginator/paginator.component';
+import { MovieDetailsComponent } from './components/pages/movie-details/movie-details.component';
+import { CastComponent } from './components/sections/cast/cast.component';
+import { CastListComponent } from './components/page/cast-list/cast-list.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { PaginatorComponent } from './components/sections/paginator/paginator.co
     ItemCardComponent,
     MovieMoreList,
     PaginatorComponent,
+    MovieDetailsComponent,
+    CastComponent,
+    CastListComponent
 
   ],
   providers: [],

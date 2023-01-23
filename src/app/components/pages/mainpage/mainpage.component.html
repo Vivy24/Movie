@@ -2,6 +2,7 @@
   <app-landing-card
     [movie]="this.latestMovie"
     [movieDetail]="this.latestMovieDetail"
+    [type]="'movie'"
   ></app-landing-card>
 
   <div class="trendingMovies" *ngIf="this.trendingMoviesList.length > 0">

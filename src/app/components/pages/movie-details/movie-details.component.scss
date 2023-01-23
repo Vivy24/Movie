@@ -1,0 +1,19 @@
+.castList {
+    display: flex;
+    overflow-x: auto;
+    justify-content: space-around;
+    height: fit-content;
+
+    .cast {
+        min-width: 200px;
+        height: fit-content;
+    }
+
+
+}
+
+.title {
+    a {
+        font-size: 0.75em;
+    }
+}

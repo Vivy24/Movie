@@ -1,0 +1,71 @@
+<div class="movieSection"></div>
+
+<div class="castSection">
+  <div class="cast">
+    <h1>
+      Cast
+      <span>
+        {{ this.castArray.length }}
+      </span>
+    </h1>
+    <div class="content">
+      <ng-container *ngFor="let cast of this.castArray">
+        <div class="cast-card">
+          <mat-card>
+            <mat-card-header>
+              <img
+                mat-card-md-image
+                *ngIf="!cast.profilePath?.includes('null')"
+                [src]="cast.profilePath"
+              />
+              <img
+                mat-card-md-image
+                *ngIf="cast.profilePath?.includes('null')"
+                [src]="'/assets/images/unknownpeople.png'"
+              />
+              <mat-card-title-group>
+                <mat-card-title>{{ cast.name }}</mat-card-title>
+                <mat-card-subtitle>{{ cast.character }}</mat-card-subtitle>
+                <mat-card-subtitle>{{ cast.department }}</mat-card-subtitle>
+              </mat-card-title-group>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="crew">
+    <h1>
+      Crew
+      <span>
+        {{ this.crewArray.length }}
+      </span>
+    </h1>
+
+    <div class="content">
+      <ng-container *ngFor="let crew of this.crewArray">
+        <div class="cast-card">
+          <mat-card>
+            <mat-card-header>
+              <img
+                mat-card-md-image
+                *ngIf="!crew.profilePath?.includes('null')"
+                [src]="crew.profilePath"
+              />
+              <img
+                mat-card-md-image
+                *ngIf="crew.profilePath?.includes('null')"
+                [src]="'/assets/images/unknownpeople.png'"
+              />
+              <mat-card-title-group>
+                <mat-card-title>{{ crew.name }}</mat-card-title>
+                <mat-card-subtitle>{{ crew.character }}</mat-card-subtitle>
+                <mat-card-subtitle>{{ crew.department }}</mat-card-subtitle>
+              </mat-card-title-group>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

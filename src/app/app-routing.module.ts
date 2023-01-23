@@ -7,19 +7,19 @@ import { MylistComponent } from './components/pages/mylist/mylist.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-movie.component';
 import { AddtoFavComponent } from './components/pages/Page/List/addto-fav/addto-fav.component';
+import { CastListComponent } from './components/page/cast-list/cast-list.component';
 
 const routes: Routes = [
   { path: 'home', component: MainpageComponent },
   { path: 'new/:page', component: MovieMoreList, data: { section: "new" } },
   { path: 'toprated/:page', component: MovieMoreList, data: { section: "toprated" } },
   { path: 'popular/:page', component: MovieMoreList, data: { section: "popular" } },
+  { path: "genres/:type/:id/:page", component: MovieMoreList, data: { section: "genre" } },
   { path: "myList", component: MylistComponent },
   { path: "addToFavList", component: AddtoFavComponent },
   { path: "addNewMovie", component: AddMovieComponent },
-  { path: "genres/:type/:id/:page", component: MovieMoreList, data: { section: "genre" } },
-  // { path: "movies/details/:id", component: MovieDetailsComponent },
   { path: ":type/details/:id", component: MovieDetailsComponent },
-
+  { path: ":type/casts/:id", component: CastListComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

@@ -47,12 +47,13 @@
 .content {
     color: black;
     padding: 0 5px;
-    margin: none;
+    margin: 8px 0px 20px 0px;
     width: 150px;
 
     h3 {
         font-size: 1em;
         word-break: break-word;
+        line-height: 1;
         font-weight: 500;
         margin-bottom: 0 !important;
     }
