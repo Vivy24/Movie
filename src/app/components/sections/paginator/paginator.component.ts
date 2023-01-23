@@ -21,6 +21,7 @@ export class PaginatorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.routerLinkBase = this.genreId ? 'genres' : '';
   }
 
   updateFirst() {
