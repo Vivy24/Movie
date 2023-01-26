@@ -65,3 +65,13 @@ export interface Cast {
     name: string;
     id: number;
 }
+
+export interface Review {
+    author: string,
+    authorAvatar?: string,
+    rating: number,
+    content: string,
+    createdAt: Date,
+    id: string,
+    url: string,
+}

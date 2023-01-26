@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Cast, Movie, MovieDetail, movieType } from '../models/model';
+import { Cast, Movie, MovieDetail, movieType, Review } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +44,7 @@ export class MoviesService {
 
   movieDetailsCast$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
   movieDetailCrew$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
-
+  movieDetailReviewList$: BehaviorSubject<Array<Review>> = new BehaviorSubject<Array<Review>>([]);
   constructor(private httpClient: HttpClient
   ) { }
 
@@ -180,6 +180,28 @@ export class MoviesService {
           return formattedCrew;
         })
         this.movieDetailCrew$.next(formattedCrewList)
+      }
+    })
+  }
+
+  public getMovieReviewById(id: string) {
+    this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${this.apiKey}&language=en-US&page=1`, {}).subscribe({
+      next: data => {
+        const formattedReviewList: Array<Review> = data.results.map((review: any) => {
+          const formattedReview: Review = {
+            author: review.author,
+
+            authorAvatar: review.author_details.avatar_path ? review.author_details.avatar_path : null,
+            rating: review.author_details.avatar_path.rating,
+            content: review.content,
+            createdAt: new Date(review.created_at),
+            id: review.id,
+            url: review.url,
+
+          }
+          return formattedReview;
+        })
+        this.movieDetailReviewList$.next(formattedReviewList)
       }
     })
   }

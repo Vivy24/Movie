@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
-import { Cast, Movie, MovieDetail } from 'src/app/models/model';
+import { Cast, Movie, MovieDetail, Review } from 'src/app/models/model';
 import { MoviesService } from 'src/app/services/movies.service';
 import { TvshowService } from 'src/app/services/tvshow.service';
 
@@ -17,6 +17,7 @@ export class MovieDetailsComponent implements OnInit {
   movie?: Movie;
   movieDetail?: MovieDetail;
   castList?: Array<Cast>;
+  reviewList?: Array<Review>;
   constructor(route: ActivatedRoute, private tvService: TvshowService, private movieService: MoviesService) {
     route.params
       .subscribe(
@@ -27,7 +28,8 @@ export class MovieDetailsComponent implements OnInit {
           if (this.type == 'movie') {
             console.log("Get Movie Detail")
             this.movieService.getMovieDetailByMovie(this.movieId);
-            this.movieService.getMovieCastById(this.movieId)
+            this.movieService.getMovieCastById(this.movieId);
+            this.movieService.getMovieReviewById(this.movieId)
           }
           else {
             console.log("Get TvShow Detail")
@@ -58,8 +60,18 @@ export class MovieDetailsComponent implements OnInit {
     })
 
     this.movieService.movieDetailsCast$.pipe(filter(cast => !!cast)).subscribe({
-      next: listOfCAst => {
-        this.castList = listOfCAst;
+      next: listOfCast => {
+        this.castList = listOfCast;
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
+
+    this.movieService.movieDetailReviewList$.pipe(filter(review => !!review)).subscribe({
+      next: reviewList => {
+        console.log(reviewList)
+        this.reviewList = reviewList;
       },
       error: error => {
         console.log(error)

@@ -31,6 +31,7 @@ import { PaginatorComponent } from './components/sections/paginator/paginator.co
 import { MovieDetailsComponent } from './components/pages/movie-details/movie-details.component';
 import { CastComponent } from './components/sections/cast/cast.component';
 import { CastListComponent } from './components/page/cast-list/cast-list.component';
+import { ReviewsCardComponent } from './components/sections/reviews-card/reviews-card.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CastListComponent } from './components/page/cast-list/cast-list.compone
     PaginatorComponent,
     MovieDetailsComponent,
     CastComponent,
-    CastListComponent
+    CastListComponent,
+    ReviewsCardComponent
 
   ],
   providers: [],
