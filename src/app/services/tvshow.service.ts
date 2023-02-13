@@ -39,8 +39,10 @@ export class TvshowService {
 
   tvShowCasts$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
   tvShowCrews$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
+  tvShowLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   constructor(private httpClient: HttpClient) { }
   private getTvshow(url: string, variable: any) {
+    this.tvShowLoaded$.next(false);
     this.httpClient.get<any>(url, {
     }).subscribe({
       next: data => {
@@ -62,7 +64,9 @@ export class TvshowService {
           return formatMovie;
         })
 
-        variable.next(formattedMovie)
+        variable.next(formattedMovie);
+        this.tvShowLoaded$.next(true);
+
       },
       error: error => {
         console.log(error);
@@ -87,6 +91,7 @@ export class TvshowService {
   }
 
   public getTvShowDetails(id: string) {
+    this.tvShowLoaded$.next(false);
     this.httpClient.get<any>(`https://api.themoviedb.org/3/tv/${id}?api_key=${this.apiKey}&language=en-US`, {
     }).subscribe({
       next: movieDetail => {
@@ -123,17 +128,19 @@ export class TvshowService {
 
         this.tvShowDetails$.next(formattedMovieDetail)
         this.tvShowSingle$.next(formattedMovie)
+        this.tvShowLoaded$.next(true);
 
-        this.httpClient.get<any>(`https://api.themoviedb.org/3/tv/${id}/watch/providers?api_key=${this.apiKey}`, {
+        // get provider 
+        // this.httpClient.get<any>(`https://api.themoviedb.org/3/tv/${id}/watch/providers?api_key=${this.apiKey}`, {
 
-        }).subscribe({
-          next: subInfo => {
+        // }).subscribe({
+        //   next: subInfo => {
 
-            if (subInfo.result) {
+        //     if (subInfo.result) {
 
-            }
-          }
-        })
+        //     }
+        //   }
+        // })
       }
 
 
@@ -141,6 +148,7 @@ export class TvshowService {
   }
 
   public getTvShowCastById(id: string) {
+    this.tvShowLoaded$.next(false);
     this.httpClient.get<any>(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
       next: castList => {
         const formattedCastList: Array<Cast> = castList.cast.map((cast: any) => {
@@ -153,12 +161,15 @@ export class TvshowService {
           }
           return formattedCast;
         })
-        this.tvShowCasts$.next(formattedCastList)
+        console.log(formattedCastList)
+        this.tvShowCasts$.next(formattedCastList);
+        this.tvShowLoaded$.next(true);
       }
     })
   }
 
   public getTvShowCrewById(id: string) {
+    this.tvShowLoaded$.next(false);
     this.httpClient.get<any>(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
       next: castList => {
 
@@ -172,7 +183,8 @@ export class TvshowService {
           }
           return formattedCrew;
         })
-        this.tvShowCrews$.next(formattedCrewList)
+        this.tvShowCrews$.next(formattedCrewList);
+        this.tvShowLoaded$.next(true);
       }
     })
   }

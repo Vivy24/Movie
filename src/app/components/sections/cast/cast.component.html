@@ -1,12 +1,11 @@
 <div class="castCard" *ngIf="castInfo">
   <mat-card>
     <img
+      [ngClass]="castInfo.profilePath === 'unknownpeople.png' ? 'no-image' : ''"
       mat-card-image
-      alt="No
-    cast image to show"
+      alt="cast image"
       [src]="castInfo.profilePath"
     />
-
     <h4>{{ castInfo.name }}</h4>
     <!--need to add link to specific cast-->
     <p>{{ castInfo.character }}</p>

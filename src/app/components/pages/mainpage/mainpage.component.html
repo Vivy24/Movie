@@ -1,5 +1,6 @@
-<div>
+<div *ngIf="loadIndicatorService.resourceAndDataLoaded$ | async">
   <app-landing-card
+    *ngIf="this.latestMovieDetail && this.latestMovie"
     [movie]="this.latestMovie"
     [movieDetail]="this.latestMovieDetail"
     [type]="'movie'"

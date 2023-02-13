@@ -45,11 +45,13 @@ export class MoviesService {
   movieDetailsCast$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
   movieDetailCrew$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
   movieDetailReviewList$: BehaviorSubject<Array<Review>> = new BehaviorSubject<Array<Review>>([]);
+  movieLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   constructor(private httpClient: HttpClient
   ) { }
 
 
   private getMovie(url: string, variable: any) {
+    this.movieLoaded$.next(false);
     this.httpClient.get<any>(url, {
     }).subscribe({
       next: data => {
@@ -70,8 +72,8 @@ export class MoviesService {
           }
           return formatMovie;
         })
-
         variable.next(formattedMovie)
+        this.movieLoaded$.next(true);
       },
       error: error => {
         console.log(error);
@@ -95,6 +97,8 @@ export class MoviesService {
   }
 
   public getMovieDetailByMovie(movieID: string) {
+    this.movieLoaded$.next(false);
+
     this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
       next: movieDetail => {
         console.log(movieDetail)
@@ -131,23 +135,26 @@ export class MoviesService {
 
         this.movieDetail$.next(formattedMovieDetail)
         this.movieSingle$.next(formattedMovie)
+        this.movieLoaded$.next(true);
 
-        this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=${this.apiKey}`, {
+        // provider 
+        // this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=${this.apiKey}`, {
 
-        }).subscribe({
-          next: subInfo => {
+        // }).subscribe({
+        //   next: subInfo => {
 
-            if (subInfo.result) {
+        //     if (subInfo.result) {
 
-            }
-          }
-        })
+        //     }
+        //   }
+        // })
       }
     })
   }
 
 
   public getMovieCastById(id: string) {
+    this.movieLoaded$.next(false);
     this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
       next: castList => {
         const formattedCastList: Array<Cast> = castList.cast.map((cast: any) => {
@@ -160,12 +167,15 @@ export class MoviesService {
           }
           return formattedCast;
         })
-        this.movieDetailsCast$.next(formattedCastList)
+        this.movieDetailsCast$.next(formattedCastList);
+        this.movieLoaded$.next(true);
+
       }
     })
   }
 
   public getMovieCrewById(id: string) {
+    this.movieLoaded$.next(false);
     this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
       next: castList => {
 
@@ -180,19 +190,21 @@ export class MoviesService {
           return formattedCrew;
         })
         this.movieDetailCrew$.next(formattedCrewList)
+        this.movieLoaded$.next(true);
+
       }
     })
   }
 
   public getMovieReviewById(id: string) {
+    this.movieLoaded$.next(false);
     this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${this.apiKey}&language=en-US&page=1`, {}).subscribe({
       next: data => {
         const formattedReviewList: Array<Review> = data.results.map((review: any) => {
           const formattedReview: Review = {
             author: review.author,
-
-            authorAvatar: review.author_details.avatar_path ? review.author_details.avatar_path : null,
-            rating: review.author_details.avatar_path.rating,
+            authorAvatar: review.author_details.avatar_path ? `${environment.HTTP_ORIGINAL_IMAGE}${review.author_details.avatar_path}` : undefined,
+            rating: review.author_details.rating ? review.author_details.rating : undefined,
             content: review.content,
             createdAt: new Date(review.created_at),
             id: review.id,
@@ -202,6 +214,8 @@ export class MoviesService {
           return formattedReview;
         })
         this.movieDetailReviewList$.next(formattedReviewList)
+        this.movieLoaded$.next(true);
+
       }
     })
   }

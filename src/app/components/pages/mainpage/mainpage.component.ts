@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs';
 import { Movie, MovieDetail } from 'src/app/models/model';
+import { LoadIndicatorService } from 'src/app/services/load-indicator.service';
 import { MoviesService } from 'src/app/services/movies.service';
 import { TvshowService } from 'src/app/services/tvshow.service';
 
@@ -18,7 +19,7 @@ export class MainpageComponent implements OnInit {
   topRatedTvShowList: Array<Movie> = [];
   latestMovie: Movie | undefined;
   latestMovieDetail: MovieDetail | undefined;
-  constructor(private moviesService: MoviesService, private tvshowService: TvshowService) { }
+  constructor(private moviesService: MoviesService, private tvshowService: TvshowService, public loadIndicatorService: LoadIndicatorService) { }
 
   ngOnInit(): void {
     this.moviesService.getMoviesByTrending();
@@ -31,8 +32,8 @@ export class MainpageComponent implements OnInit {
     this.moviesService.trendingWeekMovie$.pipe(filter(movie => !!movie)).subscribe({
       next: listOfMovie => {
         this.trendingMoviesList = listOfMovie;
+        this.trendingMoviesList[0] && this.moviesService.getMovieDetailByMovie(`${this.trendingMoviesList[0].id}`);
         this.latestMovie = this.trendingMoviesList[0];
-        this.latestMovie && this.moviesService.getMovieDetailByMovie(`${this.latestMovie.id}`);
 
       },
       error: error => {

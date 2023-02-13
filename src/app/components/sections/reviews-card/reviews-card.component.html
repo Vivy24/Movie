@@ -1,1 +1,17 @@
-<div class="review"></div>
+<div class="review" *ngIf="reviewInfo">
+  <img
+    class="author-avatar"
+    *ngIf="reviewInfo.authorAvatar"
+    [src]="reviewInfo.authorAvatar"
+  />
+  <div class="content">
+    <h3>
+      A review by <a [href]="reviewInfo.url">{{ reviewInfo.author }}</a>
+    </h3>
+    <span>Created at {{ reviewDate }}</span>
+    <p>
+      {{ reviewInfo.content.slice(0, 500) }}
+      <a [href]="reviewInfo.url">See more</a>
+    </p>
+  </div>
+</div>
