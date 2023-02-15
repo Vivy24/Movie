@@ -23,7 +23,6 @@ export class SlideshowComponent implements OnInit {
   }
 
   setNumberOfCells = () => {
-
     this.innerWidth = window.innerWidth;
     if (this.innerWidth < 350) {
       this.numberOfCells = 2;

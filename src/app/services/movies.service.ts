@@ -14,6 +14,7 @@ export class MoviesService {
   popularMovie$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   topRatedMovie$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   upcomingMovie$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
+  recommendationMovie$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
 
   movies$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   apiKey: string = environment.HTTP_API_KEY;
@@ -94,6 +95,10 @@ export class MoviesService {
 
   public getMoviesByGenre(genreID: string, page = 1) {
     this.getMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, this.movies$);
+  }
+
+  public getRecommendationMovieById(movieID: string) {
+    this.getMovie(`https://api.themoviedb.org/3/movie/${movieID}/recommendations?api_key=${this.apiKey}&language=en-US&page=1`, this.recommendationMovie$);
   }
 
   public getMovieDetailByMovie(movieID: string) {
@@ -203,7 +208,7 @@ export class MoviesService {
         const formattedReviewList: Array<Review> = data.results.map((review: any) => {
           const formattedReview: Review = {
             author: review.author,
-            authorAvatar: review.author_details.avatar_path ? `${environment.HTTP_ORIGINAL_IMAGE}${review.author_details.avatar_path}` : undefined,
+            authorAvatar: review.author_details.avatar_path ? (review.author_details.avatar_path.includes('http') ? review.author_details.avatar_path.substring(1) : `${environment.HTTP_ORIGINAL_IMAGE}${review.author_details.avatar_path}`) : undefined,
             rating: review.author_details.rating ? review.author_details.rating : undefined,
             content: review.content,
             createdAt: new Date(review.created_at),

@@ -6,45 +6,66 @@
       [type]="this.type"
     ></app-landing-card>
 
-    <div class="castSection" *ngIf="castList && castList.length > 0">
-      <div class="title">
-        <h2>
-          Cast & Crew
-          <a [routerLink]="'/' + type + '/casts/' + movieId">See Full Casts</a>
-        </h2>
+    <div class="information">
+      <div class="castSection" *ngIf="castList && castList.length > 0">
+        <div class="title">
+          <h2>
+            Cast & Crew
+            <a [routerLink]="'/' + type + '/casts/' + movieId"
+              >See Full Casts</a
+            >
+          </h2>
+        </div>
+
+        <div class="castList">
+          <ng-container *ngFor="let cast of castList">
+            <app-cast
+              class="cast"
+              *ngIf="!cast.profilePath?.includes('null')"
+              [castInfo]="cast"
+            ></app-cast>
+          </ng-container>
+        </div>
       </div>
 
-      <div class="castList">
-        <ng-container *ngFor="let cast of castList">
-          <app-cast
-            class="cast"
-            *ngIf="!cast.profilePath?.includes('null')"
-            [castInfo]="cast"
-          ></app-cast>
-        </ng-container>
-      </div>
-    </div>
+      <div class="reviewSection">
+        <div class="title">
+          <h2>
+            Reviews
+            <a
+              *ngIf="reviewList && reviewList.length > 0"
+              [routerLink]="'/' + type + '/reviews/' + movieId"
+              >See Full Reviews</a
+            >
+          </h2>
+        </div>
 
-    <div class="reviewSection">
-      <div class="title">
-        <h2>Reviews</h2>
+        <div class="reviewList">
+          <ng-container
+            *ngIf="reviewList && reviewList.length > 0; else noReview"
+          >
+            <app-reviews-card [reviewInfo]="reviewList[0]"> </app-reviews-card>
+          </ng-container>
+          <ng-template #noReview>
+            <p>No review yet</p>
+          </ng-template>
+        </div>
       </div>
 
-      <div class="reviewList">
-        <ng-container
-          *ngIf="reviewList && reviewList.length > 0; else noReview"
-        >
-          <app-reviews-card [reviewInfo]="reviewList[0]"> </app-reviews-card>
-        </ng-container>
-        <ng-template #noReview>
-          <p>No review yet</p>
-        </ng-template>
-      </div>
-    </div>
-
-    <div class="recommendationsFilm">
-      <div class="title">
-        <h2>Recommendations</h2>
+      <div class="recommendationsFilm">
+        <div class="title">
+          <h2>Recommendations</h2>
+          <app-slideshow
+            *ngIf="
+              movieRecommendationList && movieRecommendationList.length > 0;
+              else noRecommendation
+            "
+            [movieList]="this.movieRecommendationList"
+          ></app-slideshow>
+          <ng-template #noRecommendation>
+            <p>No recommendation yet</p>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>

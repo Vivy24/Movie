@@ -18,6 +18,7 @@ export class MovieDetailsComponent implements OnInit {
   movieDetail?: MovieDetail;
   castList?: Array<Cast>;
   reviewList?: Array<Review>;
+  movieRecommendationList?: Array<Movie>;
   constructor(route: ActivatedRoute, private tvService: TvshowService, private movieService: MoviesService, public loadIndicatorService: LoadIndicatorService) {
     route.params
       .subscribe(
@@ -28,11 +29,15 @@ export class MovieDetailsComponent implements OnInit {
           if (this.type == 'movie') {
             this.movieService.getMovieDetailByMovie(this.movieId);
             this.movieService.getMovieCastById(this.movieId);
-            this.movieService.getMovieReviewById(this.movieId)
+            this.movieService.getMovieReviewById(this.movieId);
+            this.movieService.getRecommendationMovieById(this.movieId);
           }
           else {
             this.tvService.getTvShowDetails(this.movieId);
             this.tvService.getTvShowCastById(this.movieId);
+            this.tvService.getTvshowReviewById(this.movieId);
+            this.tvService.getRecommendationTvshowById(this.movieId);
+
           }
         }
       );
@@ -69,8 +74,17 @@ export class MovieDetailsComponent implements OnInit {
 
     this.movieService.movieDetailReviewList$.pipe(filter(review => !!review)).subscribe({
       next: reviewList => {
-        console.log(reviewList)
         this.reviewList = reviewList;
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
+
+    this.movieService.recommendationMovie$.pipe(filter(movie => !!movie)).subscribe({
+      next: movieList => {
+        console.log(movieList)
+        this.movieRecommendationList = movieList;
       },
       error: error => {
         console.log(error)
@@ -101,6 +115,24 @@ export class MovieDetailsComponent implements OnInit {
     this.tvService.tvShowCasts$.pipe(filter(cast => !!cast)).subscribe({
       next: listOfCast => {
         this.castList = listOfCast;
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
+
+    this.tvService.tvShowReview$.pipe(filter(review => !!review)).subscribe({
+      next: reviewList => {
+        this.reviewList = reviewList;
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
+
+    this.tvService.recommendationTvshow$.pipe(filter(tvshow => !!tvshow)).subscribe({
+      next: tvshow => {
+        this.movieRecommendationList = tvshow;
       },
       error: error => {
         console.log(error)

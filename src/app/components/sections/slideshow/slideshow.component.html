@@ -1,7 +1,11 @@
 <div class="slideshow">
   <div class="description">
     <h3 *ngIf="this.title">{{ this.title }}</h3>
-    <mat-button-toggle-group name="tvshowMovieToggle" aria-label="Font Style">
+    <mat-button-toggle-group
+      name="tvshowMovieToggle"
+      aria-label="Font Style"
+      *ngIf="this.tvShowList && this.tvShowList.length > 0"
+    >
       <mat-button-toggle
         checked="true"
         (change)="onValChange($event.value)"

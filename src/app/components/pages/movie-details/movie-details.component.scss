@@ -1,20 +1,32 @@
-.castList {
-    display: flex;
-    overflow-x: auto;
-    justify-content: space-around;
-    height: fit-content;
-
-    .cast {
-        min-width: 200px;
-        height: fit-content;
-    }
-
-
-}
-
 .title {
     a {
         font-size: 0.75em;
-        
+
+    }
+}
+
+.information {
+    .castList {
+        display: flex;
+        overflow-x: auto;
+        justify-content: space-around;
+        height: fit-content;
+        margin: 20px 0;
+
+        .cast {
+            min-width: 200px;
+            height: fit-content;
+        }
+
+
+    }
+
+    h2 {
+        margin: 20px 30px;
+        font-size: 1.65em;
+    }
+
+    p {
+        margin-left: 40px;
     }
 }

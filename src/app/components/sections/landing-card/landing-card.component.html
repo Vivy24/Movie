@@ -22,7 +22,9 @@
 
       <div class="icon-bigScreen">
         <div class="circle-progress">
-          <circle-progress [percent]="movieScore"></circle-progress>
+          <circle-progress
+            [percent]="(movie?.vote_average || 0) * 10"
+          ></circle-progress>
         </div>
 
         <div class="icon-list">

@@ -30,8 +30,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { PaginatorComponent } from './components/sections/paginator/paginator.component';
 import { MovieDetailsComponent } from './components/pages/movie-details/movie-details.component';
 import { CastComponent } from './components/sections/cast/cast.component';
-import { CastListComponent } from './components/page/cast-list/cast-list.component';
+import { CastListComponent } from './components/pages/cast-list/cast-list.component';
 import { ReviewsCardComponent } from './components/sections/reviews-card/reviews-card.component';
+import { ReviewComponent } from './components/pages/review/review.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ReviewsCardComponent } from './components/sections/reviews-card/reviews
     MovieDetailsComponent,
     CastComponent,
     CastListComponent,
-    ReviewsCardComponent
+    ReviewsCardComponent,
+    ReviewComponent
 
   ],
   providers: [],

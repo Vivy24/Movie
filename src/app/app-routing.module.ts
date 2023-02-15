@@ -7,7 +7,8 @@ import { MylistComponent } from './components/pages/mylist/mylist.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-movie.component';
 import { AddtoFavComponent } from './components/pages/Page/List/addto-fav/addto-fav.component';
-import { CastListComponent } from './components/page/cast-list/cast-list.component';
+import { CastListComponent } from './components/pages/cast-list/cast-list.component';
+import { ReviewComponent } from './components/pages/review/review.component';
 
 const routes: Routes = [
   { path: 'home', component: MainpageComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: "addNewMovie", component: AddMovieComponent },
   { path: ":type/details/:id", component: MovieDetailsComponent },
   { path: ":type/casts/:id", component: CastListComponent },
+  { path: ":type/reviews/:id", component: ReviewComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

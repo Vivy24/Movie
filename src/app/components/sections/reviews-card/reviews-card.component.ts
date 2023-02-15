@@ -14,6 +14,7 @@ export class ReviewsCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.reviewInfo?.authorAvatar)
     this.reviewDate = this.reviewInfo && `${this.reviewInfo.createdAt.getFullYear()} - ${this.reviewInfo.createdAt.getMonth() + 1} - ${this.reviewInfo.createdAt.getDate() < 10 ? '0' : ""}${this.reviewInfo.createdAt.getDate()}`
   }
 

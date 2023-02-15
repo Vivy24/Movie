@@ -1,0 +1,12 @@
+<div class="review">
+  <h1>Full reviews</h1>
+  <ng-container *ngIf="reviewList && reviewList.length > 0; else noReview">
+    <div *ngFor="let review of reviewList">
+      <app-reviews-card [reviewInfo]="review"> </app-reviews-card>
+      <hr />
+    </div>
+  </ng-container>
+  <ng-template #noReview>
+    <p>No review yet</p>
+  </ng-template>
+</div>

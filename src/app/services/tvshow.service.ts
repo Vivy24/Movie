@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Cast, Movie, MovieDetail, movieType } from '../models/model';
+import { Cast, Movie, MovieDetail, movieType, Review } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class TvshowService {
   topRatedTvShow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   apiKey: string = environment.HTTP_API_KEY;
   tvShow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
+  recommendationTvshow$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
   tvShowDetails$: BehaviorSubject<MovieDetail> = new BehaviorSubject<MovieDetail>({
     genres: [],
     homepage: "",
@@ -40,6 +41,8 @@ export class TvshowService {
   tvShowCasts$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
   tvShowCrews$: BehaviorSubject<Array<Cast>> = new BehaviorSubject<Array<Cast>>([]);
   tvShowLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  tvShowReview$: BehaviorSubject<Array<Review>> = new BehaviorSubject<Array<Review>>([]);
+
   constructor(private httpClient: HttpClient) { }
   private getTvshow(url: string, variable: any) {
     this.tvShowLoaded$.next(false);
@@ -88,6 +91,10 @@ export class TvshowService {
 
   public getTvShowByGenre(genreID: string, page = 1) {
     this.getTvshow(`https://api.themoviedb.org/3/discover/tv?api_key=${this.apiKey}&with_genres=${genreID}&page=${page}`, this.tvShow$);
+  }
+
+  public getRecommendationTvshowById(tvshowID: string) {
+    this.getTvshow(`https://api.themoviedb.org/3/tv/${tvshowID}/recommendations?api_key=${this.apiKey}&language=en-US&page=1`, this.recommendationTvshow$);
   }
 
   public getTvShowDetails(id: string) {
@@ -185,6 +192,30 @@ export class TvshowService {
         })
         this.tvShowCrews$.next(formattedCrewList);
         this.tvShowLoaded$.next(true);
+      }
+    })
+  }
+
+  public getTvshowReviewById(id: string) {
+    this.tvShowLoaded$.next(false);
+    this.httpClient.get<any>(`https://api.themoviedb.org/3/tv/${id}/reviews?api_key=${this.apiKey}&language=en-US&page=1`, {}).subscribe({
+      next: data => {
+        const formattedReviewList: Array<Review> = data.results.map((review: any) => {
+          const formattedReview: Review = {
+            author: review.author,
+            authorAvatar: review.author_details.avatar_path ? (review.author_details.avatar_path.includes('http') ? review.author_details.avatar_path.substring(1) : `${environment.HTTP_ORIGINAL_IMAGE}${review.author_details.avatar_path}`) : undefined,
+            rating: review.author_details.rating ? review.author_details.rating : undefined,
+            content: review.content,
+            createdAt: new Date(review.created_at),
+            id: review.id,
+            url: review.url,
+
+          }
+          return formattedReview;
+        })
+        this.tvShowReview$.next(formattedReviewList)
+        this.tvShowLoaded$.next(true);
+
       }
     })
   }
