@@ -4,7 +4,10 @@
   <div class="imageDesc">
     <img class="posterImage" [src]="movie?.posterImage" />
     <div class="description">
-      <h1>{{ movie?.title }}</h1>
+      <a *ngIf="mainPage" [routerLink]="['/movie/details/' + movie?.id]">
+        <h1>{{ movie?.title }}</h1>
+      </a>
+      <h1 *ngIf="!mainPage">{{ movie?.title }}</h1>
       <div class="tag">
         <p>
           {{ movie?.release_date }}
@@ -56,7 +59,9 @@
             </button>
           </div>
           <div class="trailer">
-            <p><mat-icon>play_arrow</mat-icon> Play Trailer</p>
+            <p (click)="openTrailer()">
+              <mat-icon>play_arrow</mat-icon> Play Trailer
+            </p>
           </div>
         </div>
       </div>

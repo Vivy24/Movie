@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
 import { Review } from 'src/app/models/model';
-import { MoviesService } from 'src/app/services/movies.service';
-import { TvshowService } from 'src/app/services/tvshow.service';
+import { ApiControllerService } from 'src/app/services/api-controller.service';
+
 
 @Component({
   selector: 'app-review',
@@ -14,7 +14,7 @@ export class ReviewComponent implements OnInit {
   reviewList: Array<Review> = [];
   type: string = "";
   id: string = "";
-  constructor(route: ActivatedRoute, private movieService: MoviesService, private tvService: TvshowService) {
+  constructor(route: ActivatedRoute, private apiController: ApiControllerService) {
     route.params
       .subscribe(
         (val) => {
@@ -22,17 +22,17 @@ export class ReviewComponent implements OnInit {
           this.id = val["id"]
 
           if (this.type == 'movie') {
-            this.movieService.getMovieReviewById(this.id!);
+            this.apiController.getMovieReviewById(this.id!, 'movie');
           }
           else {
-            this.tvService.getTvshowReviewById(this.id!);
+            this.apiController.getMovieReviewById(this.id!, 'tvshow');
           }
         }
       );
   }
 
   ngOnInit(): void {
-    this.movieService.movieDetailReviewList$.pipe(filter(review => !!review)).subscribe({
+    this.apiController.movieDetailReviewList$.pipe(filter(review => !!review)).subscribe({
       next: reviewList => {
         this.reviewList = reviewList;
       },

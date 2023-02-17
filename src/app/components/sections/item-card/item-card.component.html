@@ -1,4 +1,7 @@
-<div [routerLink]="'/' + type + '/details/' + movie.id" *ngIf="movie != null">
+<div
+  [routerLink]="'/' + typeURL + '/details/' + movie.id"
+  *ngIf="movie != null"
+>
   <mat-card class="movieCard">
     <img mat-card-image alt="Movie poster" [src]="movie.posterImage" />
   </mat-card>

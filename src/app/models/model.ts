@@ -39,7 +39,7 @@ export interface Movie {
     vote_average: number;
     vote_count: number;
     popularity: number;
-    type: movieType;
+    type?: movieType;
 }
 
 export interface MovieDetail {
@@ -53,10 +53,15 @@ export interface MovieDetail {
 
 }
 
-export interface Trailer {
-    source: string;     // need to concat key with https://www.youtube.com/watch?v=qtVobvo7AVo 
+export interface Video {
+    id: string;
+    name: string;
+    source?: string;   // need to concat key with https://www.youtube.com/watch?v=qtVobvo7AVo 
     type: string;
+    publishedAt: Date;
 }
+
+
 
 export interface Cast {
     profilePath?: string;

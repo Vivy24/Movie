@@ -24,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { IvyCarouselModule } from 'carousel-angular';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { MovieMoreList } from './components/pages/movie-more-list/movie-more-list.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -33,6 +34,8 @@ import { CastComponent } from './components/sections/cast/cast.component';
 import { CastListComponent } from './components/pages/cast-list/cast-list.component';
 import { ReviewsCardComponent } from './components/sections/reviews-card/reviews-card.component';
 import { ReviewComponent } from './components/pages/review/review.component';
+import { SafePipe } from './pipe/safe.pipe';
+import { TrailerDialogComponent } from './components/dialog/trailer-dialog/trailer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,8 +56,9 @@ import { ReviewComponent } from './components/pages/review/review.component';
     CastComponent,
     CastListComponent,
     ReviewsCardComponent,
-    ReviewComponent
-
+    ReviewComponent,
+    TrailerDialogComponent,
+    SafePipe
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -73,6 +77,7 @@ import { ReviewComponent } from './components/pages/review/review.component';
     MatCardModule,
     IvyCarouselModule,
     MatButtonToggleModule,
+    MatDialogModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       animation: false,

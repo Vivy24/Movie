@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Movie, MovieDetail } from 'src/app/models/model';
+import { MatDialog } from '@angular/material/dialog';
+import { Movie, MovieDetail, Video } from 'src/app/models/model';
+import { TrailerDialogComponent } from '../../dialog/trailer-dialog/trailer-dialog.component';
+
 
 @Component({
   selector: 'app-landing-card',
@@ -11,7 +14,19 @@ export class LandingCardComponent implements OnInit {
   @Input() movieDetail?: MovieDetail;
   @Input() type?: string;
   @Input() mainPage?: boolean;
-  constructor() { }
+  @Input() trailer?: Video;
+  constructor(public dialog: MatDialog) {
+  }
   ngOnInit(): void {
   }
+  openTrailer(): void {
+    const dialogRef = this.dialog.open(TrailerDialogComponent, {
+      data: { youtubeSrc: this.trailer?.source },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { Movie } from 'src/app/models/model';
+import { Movie, movieType } from 'src/app/models/model';
 
 @Component({
   selector: 'app-item-card',
@@ -10,10 +10,12 @@ import { Movie } from 'src/app/models/model';
 })
 export class ItemCardComponent implements OnInit {
   @Input() movie?: Movie;
-  @Input() type?: string;
+  @Input() type?: movieType;
+  typeURL: string = "";
   constructor() { }
 
   ngOnInit(): void {
+    this.typeURL = this.type == movieType.Movie ? 'movie' : 'tvshow'
   }
 
 }

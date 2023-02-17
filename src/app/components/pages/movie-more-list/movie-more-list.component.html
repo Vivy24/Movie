@@ -6,13 +6,13 @@
     aria-label="Font Style"
   >
     <mat-button-toggle
-      [checked]="this.selection == 'movie'"
+      [checked]="this.selection == this.movieType.Movie"
       (change)="onValChange($event.value)"
       value="movie"
       >Movie</mat-button-toggle
     >
     <mat-button-toggle
-      [checked]="this.selection == 'tvshow'"
+      [checked]="this.selection == this.movieType.Tvshow"
       (change)="onValChange($event.value)"
       value="tvshow"
     >

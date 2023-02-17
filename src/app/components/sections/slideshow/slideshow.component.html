@@ -28,7 +28,7 @@
     [autoplayInterval]="2000"
   >
     <div *ngFor="let movie of this.renderMoviesList" class="carousel-cell">
-      <app-item-card [type]="type" [movie]="movie"></app-item-card>
+      <app-item-card [type]="movie.type" [movie]="movie"></app-item-card>
     </div>
   </carousel>
 </div>

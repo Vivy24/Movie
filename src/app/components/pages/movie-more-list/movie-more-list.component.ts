@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
 import { Movie, movieType } from 'src/app/models/model';
-import { MoviesService } from 'src/app/services/movies.service';
-import { TvshowService } from 'src/app/services/tvshow.service';
+import { ApiControllerService } from 'src/app/services/api-controller.service';
 import { sampleMovie } from 'src/mockedData/movie';
 
 @Component({
@@ -12,6 +11,7 @@ import { sampleMovie } from 'src/mockedData/movie';
   styleUrls: ['./movie-more-list.component.scss']
 })
 export class MovieMoreList implements OnInit {
+  [x: string]: any;
   sampleMovie: Movie = sampleMovie;
   listOfShowMovie: Array<Movie> = [];
   listOfTvShow: Array<Movie> = [];
@@ -21,8 +21,9 @@ export class MovieMoreList implements OnInit {
   page?: number = 1;
   routerLinkBase: string = ""
   section: string = "";
-  selection: string = "movie";
-  constructor(route: ActivatedRoute, private moviesService: MoviesService, private tvShowService: TvshowService) {
+  selection?: movieType;
+  movieType = movieType;
+  constructor(route: ActivatedRoute, private apiController: ApiControllerService) {
     this.section = route.snapshot.data['section'];
     route.params
       .subscribe(
@@ -34,37 +35,37 @@ export class MovieMoreList implements OnInit {
           if (this.section == 'genre') {
             if (this.type == 'movies') {
               localStorage.setItem('selectionType', 'movie');
-              this.selection = localStorage!.getItem("selectionType")!;
+              this.selection = localStorage!.getItem("selectionType")! == 'movie' ? movieType.Movie : movieType.Tvshow
 
-              this.moviesService.getMoviesByGenre(this.genreId, this.page);
+              this.apiController.getListByGenre(this.genreId, this.page, 'movie');
             }
             else {
               localStorage.setItem('selectionType', 'tvshow');
-              this.selection = localStorage!.getItem("selectionType")!;
-              this.tvShowService.getTvShowByGenre(this.genreId, this.page);
+              this.selection = localStorage!.getItem("selectionType")! == 'movie' ? movieType.Movie : movieType.Tvshow
+              this.apiController.getListByGenre(this.genreId, this.page, 'tvshow');
             }
           }
           switch (this.section) {
             case "popular":
               this.type = this.section;
-              this.moviesService.getMoviesByTrending(this.page);
-              this.tvShowService.getTvshowsByTrending(this.page);
+              this.apiController.getTrendingMovie(this.page, 'movie');
+              this.apiController.getTrendingMovie(this.page, 'tvshow');
               break;
             case "new":
               this.type = this.section;
 
-              this.moviesService.getMoviesByNowPlaying(this.page);
-              this.tvShowService.getTvShowsByOnAir(this.page);
+              this.apiController.getNowPlayingMovie(this.page, 'movie');
+              this.apiController.getNowPlayingMovie(this.page, 'tvshow');
               break;
             case "toprated":
               this.type = this.section;
 
-              this.moviesService.getMovieByTopRated(this.page);
-              this.tvShowService.getTvShowByTopRated(this.page);
+              this.apiController.getTopRatedMovie(this.page, 'movie');
+              this.apiController.getTopRatedMovie(this.page, 'tvshow');
               break;
           }
 
-          this.listOfShowMovie = this.selection == 'movie' ? this.listOfMovie : this.listOfTvShow;
+          this.listOfShowMovie = this.selection == movieType.Movie ? this.listOfMovie : this.listOfTvShow;
 
         }
       );
@@ -73,33 +74,26 @@ export class MovieMoreList implements OnInit {
 
 
   ngOnInit(): void {
-    this.selection = localStorage!.getItem("selectionType")!;
+    this.selection = localStorage!.getItem("selectionType")! == 'movie' ? movieType.Movie : movieType.Tvshow
     if (!this.selection) {
       localStorage.setItem('selectionType', 'movie');
 
     }
-    this.moviesService.movies$.pipe(filter(movie => !!movie)).subscribe({
+    this.apiController.moviesList$.pipe(filter(movie => !!movie)).subscribe({
       next: listOfMovie => {
-        this.listOfShowMovie = listOfMovie
-
-
+        if (this.type == 'movie') {
+          this.listOfShowMovie = listOfMovie
+        }
+        else {
+          this.listOfShowMovie = listOfMovie
+        }
       },
       error: error => {
         console.log(error);
       }
     })
 
-    this.tvShowService.tvShow$.pipe(filter(tvshow => !!tvshow)).subscribe({
-      next: listOfTvShow => {
-        this.listOfShowMovie = listOfTvShow
-
-      },
-      error: error => {
-        console.log(error)
-      }
-    })
-
-    this.moviesService.trendingWeekMovie$.pipe(filter(movie => !!movie)).subscribe({
+    this.apiController.trendingWeekMovie$.pipe(filter(movie => !!movie)).subscribe({
       next: listOfMovie => {
         this.listOfMovie = listOfMovie;
         this.updateMovies();
@@ -109,7 +103,7 @@ export class MovieMoreList implements OnInit {
         console.log(error);
       }
     })
-    this.moviesService.nowPlayingMovie$.pipe(filter(movie => !!movie)).subscribe({
+    this.apiController.nowPlayingMovie$.pipe(filter(movie => !!movie)).subscribe({
       next: listOfMovie => {
         this.listOfMovie = listOfMovie;
         this.updateMovies();
@@ -120,7 +114,7 @@ export class MovieMoreList implements OnInit {
       }
     })
 
-    this.moviesService.topRatedMovie$.pipe(filter(movie => !!movie)).subscribe({
+    this.apiController.topRatedMovie$.pipe(filter(movie => !!movie)).subscribe({
       next: listOfMovie => {
         this.listOfMovie = listOfMovie;
         this.updateMovies();
@@ -132,7 +126,7 @@ export class MovieMoreList implements OnInit {
 
 
 
-    this.tvShowService.trendingWeekTvshow$.pipe(filter(tvshow => !!tvshow)).subscribe({
+    this.apiController.trendingWeekTvshow$.pipe(filter(tvshow => !!tvshow)).subscribe({
       next: listOfTvShow => {
         this.listOfTvShow = listOfTvShow;
         this.updateMovies();
@@ -143,7 +137,7 @@ export class MovieMoreList implements OnInit {
       }
     })
 
-    this.tvShowService.onAirTvShow$.pipe(filter(movie => !!movie)).subscribe({
+    this.apiController.nowPlayingTvshow$.pipe(filter(movie => !!movie)).subscribe({
       next: listOfMovie => {
         this.listOfTvShow = listOfMovie;
         this.updateMovies();
@@ -154,7 +148,7 @@ export class MovieMoreList implements OnInit {
       }
     })
 
-    this.tvShowService.topRatedTvShow$.pipe(filter(movie => !!movie)).subscribe({
+    this.apiController.topRatedTvshow$.pipe(filter(movie => !!movie)).subscribe({
       next: listOfMovie => {
         this.listOfTvShow = listOfMovie;
         this.updateMovies();
@@ -168,11 +162,11 @@ export class MovieMoreList implements OnInit {
   onValChange = (value: any) => {
     localStorage.setItem('selectionType', value);
     this.selection = value;
-    this.listOfShowMovie = this.selection == 'movie' ? this.listOfMovie : this.listOfTvShow;
+    this.listOfShowMovie = this.selection == movieType.Movie ? this.listOfMovie : this.listOfTvShow;
   }
 
   updateMovies = () => {
-    this.listOfShowMovie = this.selection == 'movie' ? this.listOfMovie : this.listOfTvShow;
+    this.listOfShowMovie = this.selection == movieType.Movie ? this.listOfMovie : this.listOfTvShow;
 
   }
 }
