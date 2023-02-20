@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
 import { Movie, movieType } from 'src/app/models/model';
 import { ApiControllerService } from 'src/app/services/api-controller.service';
-import { sampleMovie } from 'src/mockedData/movie';
 
 @Component({
   selector: 'app-movie-more-list',
@@ -11,8 +10,6 @@ import { sampleMovie } from 'src/mockedData/movie';
   styleUrls: ['./movie-more-list.component.scss']
 })
 export class MovieMoreList implements OnInit {
-  [x: string]: any;
-  sampleMovie: Movie = sampleMovie;
   listOfShowMovie: Array<Movie> = [];
   listOfTvShow: Array<Movie> = [];
   listOfMovie: Array<Movie> = [];
@@ -36,7 +33,6 @@ export class MovieMoreList implements OnInit {
             if (this.type == 'movies') {
               localStorage.setItem('selectionType', 'movie');
               this.selection = localStorage!.getItem("selectionType")! == 'movie' ? movieType.Movie : movieType.Tvshow
-
               this.apiController.getListByGenre(this.genreId, this.page, 'movie');
             }
             else {

@@ -5,9 +5,7 @@
     [src]="reviewInfo.authorAvatar"
   />
   <div class="content">
-    <h3>
-      A review by <a [href]="reviewInfo.url">{{ reviewInfo.author }}</a>
-    </h3>
+    <h3><a [href]="reviewInfo.url">A review </a> by {{ reviewInfo.author }}</h3>
     <span>Created at {{ reviewDate }}</span>
     <p>
       {{ reviewInfo.content.slice(0, 500) }}

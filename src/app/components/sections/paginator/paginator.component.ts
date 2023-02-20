@@ -7,17 +7,17 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
   styleUrls: ['./paginator.component.scss']
 })
 export class PaginatorComponent implements OnInit {
-  numberArray: Array<number> = Array.from({ length: 500 }, (_, i) => i + 1)
+  numberArray: Array<number> = Array.from({ length: 300 }, (_, i) => i + 1)
   @Input() currentPage: number = 1
-  @Input() totalPages = 500
-  @Input() windowSize: number = 10;
+  @Input() totalPages = 300
+  @Input() windowSize: number = 5;
   @Input() type?: string;
   @Input() genreId?: string;
   @Input() showFirstLastButton = true
   @Input() routerLinkBase: string = this.genreId ? 'genres' : '';
   previousPage: number = this.currentPage - 1;
   nextPage: number = this.currentPage + 1;
-  showingPage: Array<number> = Array.from({ length: this.windowSize > 1 ? this.windowSize : 1 }, (_, i) => i + 1)
+  showingPage: Array<number> = Array.from({ length: this.windowSize > 1 ? this.windowSize + this.windowSize : 1 }, (_, i) => i + 1)
   constructor() { }
 
   ngOnInit(): void {
@@ -34,15 +34,15 @@ export class PaginatorComponent implements OnInit {
   }
 
   updateLast() {
-    this.currentPage = 500;
-    this.previousPage = 499;
-    this.nextPage = 500;
-    this.showingPage = Array.from({ length: 10 }, (_, i) => i + + 491);
+    this.currentPage = 300;
+    this.previousPage = 299;
+    this.nextPage = 300;
+    this.showingPage = Array.from({ length: 10 }, (_, i) => i + + 291);
   }
 
   updateShowPage() {
-
-    if (this.currentPage > this.windowSize) {
+    this.windowSize = 5;
+    if (this.currentPage >= this.windowSize) {
       this.showingPage = this.numberArray.slice(+this.currentPage - +this.windowSize, +this.currentPage + +this.windowSize)
     }
     else if (this.currentPage < this.windowSize) {
@@ -50,7 +50,7 @@ export class PaginatorComponent implements OnInit {
     }
   }
   updateCurrentPage(event: any) {
-    this.currentPage = event.srcElement.innerText >= 500 ? 500 : event.srcElement.innerText;
+    this.currentPage = event.srcElement.innerText >= 300 ? 300 : event.srcElement.innerText;
     this.previousPage = this.currentPage - 1;
     this.nextPage = +this.currentPage + 1;
     this.updateShowPage();
@@ -66,7 +66,7 @@ export class PaginatorComponent implements OnInit {
   }
 
   updateNext() {
-    this.currentPage = +this.nextPage >= 500 ? 500 : +this.nextPage;
+    this.currentPage = +this.nextPage >= 300 ? 300 : +this.nextPage;
     this.nextPage = +this.currentPage + 1;
     this.previousPage = +this.currentPage - 1;
 

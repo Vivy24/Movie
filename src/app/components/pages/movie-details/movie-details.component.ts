@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { Cast, Movie, MovieDetail, Review, Video } from 'src/app/models/model';
 import { ApiControllerService } from 'src/app/services/api-controller.service';
@@ -20,7 +20,8 @@ export class MovieDetailsComponent implements OnInit {
   movieRecommendationList?: Array<Movie>;
   movieVideoList?: Array<Video>;
   trailer?: Video;
-  constructor(route: ActivatedRoute, private apiController: ApiControllerService, public loadIndicatorService: LoadIndicatorService) {
+  firstVideo?: Video;
+  constructor(route: ActivatedRoute, private apiController: ApiControllerService, public loadIndicatorService: LoadIndicatorService, private router: Router) {
     route.params
       .subscribe(
         (val) => {
@@ -96,13 +97,16 @@ export class MovieDetailsComponent implements OnInit {
     this.apiController.movieDetailVideoList$.pipe(filter(video => !!video)).subscribe({
       next: videoList => {
         this.movieVideoList = videoList;
+        console.log(this.movieVideoList);
         this.trailer = videoList.find((video) => {
           return video.type == "Trailer"
         })
+        this.firstVideo = this.movieVideoList[0];
       },
       error: error => {
         console.log(error)
       }
     })
+
   }
 }

@@ -9,6 +9,7 @@ import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-mo
 import { AddtoFavComponent } from './components/pages/Page/List/addto-fav/addto-fav.component';
 import { CastListComponent } from './components/pages/cast-list/cast-list.component';
 import { ReviewComponent } from './components/pages/review/review.component';
+import { PageApiErrorComponent } from './components/page-api-error/page-api-error.component';
 
 const routes: Routes = [
   { path: 'home', component: MainpageComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: ":type/details/:id", component: MovieDetailsComponent },
   { path: ":type/casts/:id", component: CastListComponent },
   { path: ":type/reviews/:id", component: ReviewComponent },
+  { path: "server/error", component: PageApiErrorComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

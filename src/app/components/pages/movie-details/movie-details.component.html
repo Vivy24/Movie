@@ -53,6 +53,37 @@
         </div>
       </div>
 
+      <div class="videoFilm">
+        <div class="title">
+          <h2>Videos {{ movieVideoList?.length }}</h2>
+          <div
+            class="videoInfo"
+            *ngIf="movieVideoList && movieVideoList.length > 0; else noVideo"
+          >
+            <iframe
+              class="mainVideo"
+              width="400"
+              height="300"
+              *ngIf="firstVideo"
+              [src]="firstVideo?.source! | safe : 'resourceUrl'"
+              allowfullscreen
+            ></iframe>
+
+            <a
+              class="link"
+              *ngIf="movieVideoList && movieVideoList.length > 1"
+              [routerLink]="'/' + type + '/videos/' + movieId"
+              >View more
+              <mat-icon class="material-icons">arrow_forward_ios</mat-icon>
+            </a>
+          </div>
+
+          <ng-template #noVideo>
+            <p>No videos yet</p>
+          </ng-template>
+        </div>
+      </div>
+
       <div class="recommendationsFilm">
         <div class="title">
           <h2>Recommendations</h2>

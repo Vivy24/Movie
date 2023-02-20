@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { Movie, MovieDetail } from 'src/app/models/model';
 import { ApiControllerService } from 'src/app/services/api-controller.service';
@@ -98,6 +99,14 @@ export class MainpageComponent implements OnInit {
         console.log(error);
       }
     })
-  }
 
+    // this.loadIndicatorService.criticalError$.pipe(filter(error => !!error)).subscribe({
+    //   next: hasError => {
+    //     if (hasError) {
+    //       this.router.navigateByUrl('/server/error')
+    //     }
+    //   }
+    // })
+  }
 }
+

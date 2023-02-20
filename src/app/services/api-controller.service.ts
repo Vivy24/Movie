@@ -59,13 +59,16 @@ export class ApiControllerService {
   movieDetailVideoList$: BehaviorSubject<Array<Video>> = new BehaviorSubject<Array<Video>>([]);
   recommendationMovieList$: BehaviorSubject<Array<Movie>> = new BehaviorSubject<Array<Movie>>([]);
 
+  // status
   movieLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-
+  hasError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) { }
 
   private getMovie(url: string, variable: any, type: string) {
     this.movieLoaded$.next(false);
+    this.hasError$.next(false);
+
     this.httpClient.get<any>(url, {
     }).subscribe({
       next: data => {
@@ -75,7 +78,7 @@ export class ApiControllerService {
             adult: movie.adult,
             backdropImage: `${environment.HTTP_ORIGINAL_IMAGE}${movie.backdrop_path}`,
             posterImage: `${environment.HTTP_ORIGINAL_IMAGE}${movie.poster_path}`,
-            title: movie.original_title,
+            title: movie.original_title || movie.original_name,
             overview: movie.overview,
             release_date: movie.release_date,
             languages: movie.original_language,
@@ -89,8 +92,8 @@ export class ApiControllerService {
         variable.next(formattedMovie)
         this.movieLoaded$.next(true);
       },
-      error: error => {
-        console.log(error);
+      error: Error => {
+        this.hasError$.next(true);
       }
     })
   }
@@ -119,10 +122,11 @@ export class ApiControllerService {
 
     this.httpClient.get<any>(type == 'movie' ? `https://api.themoviedb.org/3/movie/${movieID}?api_key=${this.apiKey}&language=en-US` : `https://api.themoviedb.org/3/tv/${movieID}?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
       next: movieDetail => {
+        console.log(movieDetail)
         // movie;
         const formattedMovieDetail = {
           homepage: movieDetail.homepage,
-          country: movieDetail.production_countries[0].iso_3166_1,
+          country: movieDetail.production_countries[0] ? movieDetail.production_countries[0].iso_3166_1.iso_3166_1 : movieDetail.original_country[0],
           status: movieDetail.status,
           tagline: movieDetail.tagline,
           genres: movieDetail.genres,
@@ -140,7 +144,7 @@ export class ApiControllerService {
           adult: movieDetail.adult,
           backdropImage: movieDetail.belongs_to_collection != null ? `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.belongs_to_collection.backdrop_path}` : `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.backdrop_path}`,
           posterImage: movieDetail.belongs_to_collection != null ? `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.belongs_to_collection.poster_path}` : `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.poster_path}`,
-          title: movieDetail.original_title,
+          title: movieDetail.original_title || movieDetail.original_name,
           overview: movieDetail.overview,
           release_date: movieDetail.release_date,
           languages: movieDetail.original_language,
@@ -165,6 +169,9 @@ export class ApiControllerService {
         //     }
         //   }
         // })
+      },
+      error: Error => {
+        this.hasError$.next(true);
       }
     })
   }
@@ -187,6 +194,9 @@ export class ApiControllerService {
         this.movieDetailsCast$.next(formattedCastList);
         this.movieLoaded$.next(true);
 
+      },
+      error: Error => {
+        this.hasError$.next(true);
       }
     })
   }
@@ -209,6 +219,9 @@ export class ApiControllerService {
         this.movieDetailCrew$.next(formattedCrewList)
         this.movieLoaded$.next(true);
 
+      },
+      error: Error => {
+        this.hasError$.next(true);
       }
     })
   }
@@ -233,6 +246,9 @@ export class ApiControllerService {
         this.movieDetailReviewList$.next(formattedReviewList)
         this.movieLoaded$.next(true);
 
+      },
+      error: Error => {
+        this.hasError$.next(true);
       }
     })
   }
@@ -254,6 +270,9 @@ export class ApiControllerService {
         })
         this.movieDetailVideoList$.next(formattedVideo);
         this.movieLoaded$.next(true);
+      },
+      error: Error => {
+        this.hasError$.next(true);
       }
     })
   }

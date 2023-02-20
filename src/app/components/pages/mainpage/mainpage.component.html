@@ -1,4 +1,4 @@
-<div *ngIf="loadIndicatorService.resourceAndDataLoaded$ | async">
+<div *ngIf="loadIndicatorService.resourceAndDataLoaded$ | async; else loading">
   <app-landing-card
     *ngIf="this.latestMovieDetail && this.latestMovie"
     [movie]="this.latestMovie"
@@ -31,3 +31,6 @@
     ></app-slideshow>
   </div>
 </div>
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

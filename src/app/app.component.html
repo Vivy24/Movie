@@ -1,5 +1,5 @@
 <div class="app">
-  <app-navbar></app-navbar>
+  <app-navbar *ngIf="!hasError"></app-navbar>
   <div class="viewport">
     <router-outlet></router-outlet>
   </div>

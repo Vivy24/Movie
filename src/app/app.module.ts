@@ -36,6 +36,8 @@ import { ReviewsCardComponent } from './components/sections/reviews-card/reviews
 import { ReviewComponent } from './components/pages/review/review.component';
 import { SafePipe } from './pipe/safe.pipe';
 import { TrailerDialogComponent } from './components/dialog/trailer-dialog/trailer-dialog.component';
+import { PageApiErrorComponent } from './components/page-api-error/page-api-error.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -58,13 +60,14 @@ import { TrailerDialogComponent } from './components/dialog/trailer-dialog/trail
     ReviewsCardComponent,
     ReviewComponent,
     TrailerDialogComponent,
-    SafePipe
+    SafePipe,
+    PageApiErrorComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     MatMenuModule,
     MatToolbarModule,
@@ -96,8 +99,8 @@ import { TrailerDialogComponent } from './components/dialog/trailer-dialog/trail
       subtitleFontWeight: "700",
       subtitleColor: "#5c5c5c",
       showUnits: true,
-    })
-
+    }),
+    MatProgressSpinnerModule
   ]
 })
 export class AppModule { }
