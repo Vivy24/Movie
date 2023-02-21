@@ -18,15 +18,9 @@ export class ReviewComponent implements OnInit {
     route.params
       .subscribe(
         (val) => {
-          this.type = val["type"];
+          this.type = val["type"].toLowerCase();
           this.id = val["id"]
-
-          if (this.type == 'movie') {
-            this.apiController.getMovieReviewById(this.id!, 'movie');
-          }
-          else {
-            this.apiController.getMovieReviewById(this.id!, 'tvshow');
-          }
+          this.apiController.getMovieReviewById(this.id!, this.type!);
         }
       );
   }

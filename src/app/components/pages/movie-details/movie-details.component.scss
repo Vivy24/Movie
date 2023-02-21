@@ -34,14 +34,20 @@
         margin-left: 20px;
     }
 
-    .videoInfo {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .link {
+        display: block;
+        font-size: 1.5em;
     }
 
-    .link {
-        margin-right: 5em;
-        font-size: 1.5em;
+    @media(min-width: 800px) {
+        .videoInfo {
+            display: flex;
+            align-items: center;
+        }
+
+        .link {
+            display: inline;
+            margin-left: 40px;
+        }
     }
 }

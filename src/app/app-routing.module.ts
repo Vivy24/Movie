@@ -10,6 +10,7 @@ import { AddtoFavComponent } from './components/pages/Page/List/addto-fav/addto-
 import { CastListComponent } from './components/pages/cast-list/cast-list.component';
 import { ReviewComponent } from './components/pages/review/review.component';
 import { PageApiErrorComponent } from './components/page-api-error/page-api-error.component';
+import { VideoPageComponent } from './components/pages/video-page/video-page.component';
 
 const routes: Routes = [
   { path: 'home', component: MainpageComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: ":type/details/:id", component: MovieDetailsComponent },
   { path: ":type/casts/:id", component: CastListComponent },
   { path: ":type/reviews/:id", component: ReviewComponent },
+  { path: ":type/videos/:id", component: VideoPageComponent },
   { path: "server/error", component: PageApiErrorComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

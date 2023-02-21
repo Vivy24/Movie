@@ -1,3 +1,4 @@
+<a class="backLink" [routerLink]="'/' + type + '/details/' + id">Back</a>
 <div class="review">
   <h1>Full reviews</h1>
   <ng-container *ngIf="reviewList && reviewList.length > 0; else noReview">

@@ -253,7 +253,7 @@ export class ApiControllerService {
     })
   }
 
-  public getMovieTrailerById(movieId: string, type: string) {
+  public getVideoById(movieId: string, type: string) {
     this.movieLoaded$.next(false);
     this.httpClient.get<any>(type == 'movie' ? `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${this.apiKey}&language=en-US` : `https://api.themoviedb.org/3/tv/${movieId}/videos?api_key=${this.apiKey}&language=en-US`, {}).subscribe({
       next: data => {

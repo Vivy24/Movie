@@ -1,0 +1,13 @@
+<div>
+  <a class="backLink" [routerLink]="'/' + type + '/details/' + movieID">Back</a>
+
+  <h3>Full Video</h3>
+  <div *ngFor="let video of videoList">
+    <iframe
+      class="video"
+      [src]="video.source! | safe : 'resourceUrl'"
+      allowfullscreen
+    >
+    </iframe>
+  </div>
+</div>

@@ -65,7 +65,7 @@
               width="400"
               height="300"
               *ngIf="firstVideo"
-              [src]="firstVideo?.source! | safe : 'resourceUrl'"
+              [src]="firstVideo.source! | safe : 'resourceUrl'"
               allowfullscreen
             ></iframe>
 

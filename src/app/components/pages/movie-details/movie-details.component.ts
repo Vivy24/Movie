@@ -33,14 +33,14 @@ export class MovieDetailsComponent implements OnInit {
             this.apiController.getMovieCastById(this.movieId, 'movie');
             this.apiController.getMovieReviewById(this.movieId, 'movie');
             this.apiController.getRecommendationMovieById(this.movieId, 'movie');
-            this.apiController.getMovieTrailerById(this.movieId, 'movie')
+            this.apiController.getVideoById(this.movieId, 'movie')
           }
           else {
             this.apiController.getMovieDetailByMovie(this.movieId, 'tvshow');
             this.apiController.getMovieCastById(this.movieId, 'tvshow');
             this.apiController.getMovieReviewById(this.movieId, 'tvshow');
             this.apiController.getRecommendationMovieById(this.movieId, 'tvshow');
-            this.apiController.getMovieTrailerById(this.movieId, 'tvshow')
+            this.apiController.getVideoById(this.movieId, 'tvshow')
 
           }
         }
