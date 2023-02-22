@@ -1,7 +1,9 @@
 <div>
-  <a class="backLink" [routerLink]="'/' + type + '/details/' + movieID">Back</a>
+  <a class="backLink" [routerLink]="'/' + type + '/details/' + movieID">
+    <mat-icon aria-hidden="false" aria-label="back icon">arrow_back</mat-icon>
+  </a>
 
-  <h3>Full Video</h3>
+  <h1>Full Videos</h1>
   <div *ngFor="let video of videoList">
     <iframe
       class="video"

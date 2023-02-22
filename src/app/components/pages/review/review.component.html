@@ -1,6 +1,8 @@
-<a class="backLink" [routerLink]="'/' + type + '/details/' + id">Back</a>
+<a class="backLink" [routerLink]="'/' + type + '/details/' + id">
+  <mat-icon aria-hidden="false" aria-label="back icon">arrow_back</mat-icon>
+</a>
 <div class="review">
-  <h1>Full reviews</h1>
+  <h1>Full Reviews</h1>
   <ng-container *ngIf="reviewList && reviewList.length > 0; else noReview">
     <div *ngFor="let review of reviewList">
       <app-reviews-card [reviewInfo]="review"> </app-reviews-card>

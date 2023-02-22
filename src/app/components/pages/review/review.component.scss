@@ -1,7 +1,11 @@
 .review {
     padding: 3em 1em;
 
+    h1 {
+        text-align: center;
+    }
 }
+
 
 .reviewCard {
     background-color: red;
@@ -9,4 +13,9 @@
 
 .backLink {
     margin: 5em 1em;
+}
+
+mat-icon {
+    margin-top: 1em;
+    font-size: 2em;
 }
