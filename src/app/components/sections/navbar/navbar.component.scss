@@ -1,99 +1,95 @@
-    ::ng-deep .horizontal-item {
-        @media(min-width: 800px) {
-            display: inline-block;
-        }
+::ng-deep .horizontal-item {
+  @media (min-width: 800px) {
+    display: inline-block;
+  }
 
-        text-decoration: none;
-        margin: auto;
-        color: white;
-        font-size: 1em;
+  text-decoration: none;
+  margin: auto;
+  color: white;
+  font-size: 1em;
 
-        width: 150px;
+  width: 150px;
+}
+
+::ng-deep .horizontal-item:hover {
+  text-decoration: underline;
+}
+
+::ng-deep .mat-menu-panel {
+  max-width: none !important;
+}
+
+::ng-deep .list-horizontal {
+  padding: 0.75em;
+
+  @media (min-width: 800px) {
+    width: 300px;
+  }
+}
+
+.top-nav {
+  font-family: "lato", "arial", sans-serif;
+
+  .left {
+    .bigScreen {
+      display: none;
     }
 
-    ::ng-deep .horizontal-item:hover {
-        text-decoration: underline;
+    .smallScreen {
+      display: inline-block;
     }
 
-    ::ng-deep .mat-menu-panel {
-        max-width: none !important;
+    @media (min-width: 800px) {
+      span {
+        margin: 1em;
+      }
+    }
+  }
+
+  span:hover {
+    cursor: pointer;
+  }
+
+  div {
+    a {
+      font-size: 1em;
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      margin: 10px;
     }
 
-    ::ng-deep .list-horizontal {
-        padding: 0.75em;
-
-        @media(min-width: 800px) {
-            width: 300px;
-        }
-
+    &.right {
+      margin-left: auto;
     }
+  }
 
-    .top-nav {
-        font-family: 'lato', 'arial', sans-serif;
+  .openMenu {
+    cursor: pointer;
+  }
 
-        .left {
-            .bigScreen {
-                display: none;
-            }
+  .material-icons {
+    font-size: 2em;
+  }
 
-            .smallScreen {
-                display: inline-block;
-            }
+  @media (min-width: 800px) {
+    .left {
+      .bigScreen {
+        display: inline-block;
+      }
 
-            @media(min-width: 800px) {
-                span {
-                    margin: 1em;
-                }
-            }
-
-        }
-
-        span:hover {
-            cursor: pointer;
-        }
-
-        div {
-            a {
-                font-size: 1em;
-                text-decoration: none;
-                color: white;
-                display: inline-block;
-                margin: 10px;
-            }
-
-            &.right {
-                margin-left: auto;
-            }
-        }
-
-        .openMenu {
-            cursor: pointer;
-        }
-
-        .material-icons {
-            font-size: 2em;
-        }
-
-
-
-        @media(min-width: 800px) {
-            .left {
-                .bigScreen {
-                    display: inline-block;
-                }
-
-                .smallScreen {
-                    display: none;
-                }
-            }
-        }
-
-        @media(min-width: 1400px) {
-            div {
-                a {
-                    margin-left: 20px;
-                    margin-right: 20px;
-                }
-            }
-        }
+      .smallScreen {
+        display: none;
+      }
     }
+  }
+
+  @media (min-width: 1400px) {
+    div {
+      a {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+}

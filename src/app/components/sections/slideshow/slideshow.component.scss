@@ -1,58 +1,55 @@
 .slideshow {
-    margin: 0 auto;
-    width: 90%;
+  margin: 0 auto;
+  width: 90%;
 
-    h3 {
-        font-size: 1.75em;
-        padding-top: 1em;
-        padding-bottom: 0;
-        margin-bottom: 0;
-        width: fit-content;
-        display: block;
-        font-weight: 500;
-    }
+  h3 {
+    font-size: 1.75em;
+    padding-top: 1em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    width: fit-content;
+    display: block;
+    font-weight: 500;
+  }
 }
 
-
 ::ng-deep .carousel {
-    padding: 1em;
-    padding-left: 2.5em;
-    border-radius: 5px;
+  padding: 1em;
+  padding-left: 2.5em;
+  border-radius: 5px;
 
-    .carousel-dot {
-        border: 1px solid #777 !important;
-    }
+  .carousel-dot {
+    border: 1px solid #777 !important;
+  }
 
-    .carousel-dot-active {
-        background-color: #777 !important;
-    }
+  .carousel-dot-active {
+    background-color: #777 !important;
+  }
 
-    .carousel-arrow {
-        background-color: #777 !important;
-    }
+  .carousel-arrow {
+    background-color: #777 !important;
+  }
 }
 
 .description {
-    display: flex;
-    align-items: baseline;
+  display: flex;
+  align-items: baseline;
 }
 
 .mat-button-toggle-group {
-    margin-left: 1em;
-    display: inline-flex;
+  margin-left: 1em;
+  display: inline-flex;
 
-    .mat-button-toggle {
-        height: 3em;
-        width: 80px;
-    }
+  .mat-button-toggle {
+    height: 3em;
+    width: 80px;
+  }
 }
 
-
-
 .carousel-cell {
-    padding-top: 1em;
+  padding-top: 1em;
 
-    &:first-child {
-        margin-left: 1em !important;
-    }
+  &:first-child {
+    margin-left: 1em !important;
+  }
 }

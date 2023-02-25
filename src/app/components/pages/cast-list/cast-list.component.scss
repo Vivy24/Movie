@@ -1,48 +1,47 @@
 .castSection {
-    span {
-        font-size: 0.75em;
-        color: grey;
-    }
+  span {
+    font-size: 0.75em;
+    color: grey;
+  }
 }
 
-
 .mat-card {
-    margin-top: 20px;
-    width: 350px !important;
-    padding: 0;
-    box-shadow: none;
+  margin-top: 20px;
+  width: 350px !important;
+  padding: 0;
+  box-shadow: none;
+  color: black;
+
+  img {
+    margin-right: 20px;
+  }
+
+  background-color: transparent;
+
+  .mat-card-subtitle {
     color: black;
-
-    img {
-        margin-right: 20px;
-    }
-
-    background-color: transparent;
-
-    .mat-card-subtitle {
-        color: black;
-    }
+  }
 }
 
 .cast .crew {
-    width: fit-content;
+  width: fit-content;
 }
 
 .crew {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 mat-icon {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 @media (min-width: 700px) {
-    .crew {
-        margin-top: 0px;
-    }
+  .crew {
+    margin-top: 0px;
+  }
 
-    .castSection {
-        display: flex;
-        justify-content: space-around;
-    }
+  .castSection {
+    display: flex;
+    justify-content: space-around;
+  }
 }

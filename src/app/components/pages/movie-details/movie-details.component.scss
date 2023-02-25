@@ -1,59 +1,53 @@
 .title {
-    a {
-        font-size: 0.75em;
-
-    }
+  a {
+    font-size: 0.75em;
+  }
 }
 
 .information {
-    .castList {
-        display: flex;
-        overflow-x: auto;
-        justify-content: space-around;
-        height: fit-content;
-        margin: 20px 0;
+  .castList {
+    display: flex;
+    overflow-x: auto;
+    justify-content: space-around;
+    height: fit-content;
+    margin: 20px 0;
 
-        .cast {
-            min-width: 200px;
-            height: fit-content;
-        }
+    .cast {
+      min-width: 200px;
+      height: fit-content;
     }
+  }
 
-    h2 {
-        margin: 20px 30px;
-        font-size: 1.65em;
-    }
+  h2 {
+    margin: 20px 30px;
+    font-size: 1.65em;
+  }
 
-    p {
-        margin-left: 40px;
-    }
+  p {
+    margin-left: 40px;
+  }
 
+  .mainVideo {
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+  }
 
-
+  @media (min-width: 500px) {
     .mainVideo {
-        display: block;
-        width: 250px;
-        margin: 0 auto;
+      width: 400px;
+    }
+  }
+
+  @media (min-width: 800px) {
+    .mainVideo {
+      width: 700px;
+      height: 400px;
     }
 
-    @media(min-width:500px) {
-        .mainVideo {
-            width: 400px;
-        }
+    .videoInfo {
+      display: flex;
+      align-items: center;
     }
-
-    @media(min-width: 800px) {
-
-        .mainVideo {
-            width: 700px;
-            height: 400px;
-        }
-
-        .videoInfo {
-            display: flex;
-            align-items: center;
-        }
-
-
-    }
+  }
 }
