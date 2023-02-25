@@ -8,9 +8,8 @@ describe('AddtoFavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddtoFavComponent ]
-    })
-    .compileComponents();
+      declarations: [AddtoFavComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddtoFavComponent);
     component = fixture.componentInstance;

@@ -14,7 +14,7 @@
           <a
             *ngFor="let genre of movieDetail?.genres"
             [routerLink]="
-              type == 'movie'
+              type === 'movie'
                 ? ['/genres/movies/' + genre.id + '/1/']
                 : ['/genres/tvshow/' + genre.id + '/1/']
             "

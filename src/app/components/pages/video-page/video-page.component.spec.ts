@@ -8,9 +8,8 @@ describe('VideoPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideoPageComponent ]
-    })
-    .compileComponents();
+      declarations: [VideoPageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(VideoPageComponent);
     component = fixture.componentInstance;

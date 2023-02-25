@@ -62,7 +62,7 @@ import { VideoPageComponent } from './components/pages/video-page/video-page.com
     TrailerDialogComponent,
     SafePipe,
     PageApiErrorComponent,
-    VideoPageComponent
+    VideoPageComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -87,21 +87,21 @@ import { VideoPageComponent } from './components/pages/video-page/video-page.com
       animation: false,
       radius: 60,
       space: -10,
-      title: "auto",
-      subtitle: "user scores",
+      title: 'auto',
+      subtitle: 'user scores',
       outerStrokeWidth: 10,
       innerStrokeWidth: 10,
       renderOnClick: false,
-      outerStrokeColor: "#5c5c5c",
-      innerStrokeColor: "#d7d7d7",
+      outerStrokeColor: '#5c5c5c',
+      innerStrokeColor: '#d7d7d7',
       responsive: true,
-      titleFontSize: "25px",
-      subtitleFontSize: "15px",
-      subtitleFontWeight: "700",
-      subtitleColor: "#5c5c5c",
+      titleFontSize: '25px',
+      subtitleFontSize: '15px',
+      subtitleFontWeight: '700',
+      subtitleColor: '#5c5c5c',
       showUnits: true,
     }),
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+  ],
 })
-export class AppModule { }
+export class AppModule {}

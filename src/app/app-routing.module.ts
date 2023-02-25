@@ -14,24 +14,36 @@ import { VideoPageComponent } from './components/pages/video-page/video-page.com
 
 const routes: Routes = [
   { path: 'home', component: MainpageComponent },
-  { path: 'new/:page', component: MovieMoreList, data: { section: "new" } },
-  { path: 'toprated/:page', component: MovieMoreList, data: { section: "toprated" } },
-  { path: 'popular/:page', component: MovieMoreList, data: { section: "popular" } },
-  { path: "genres/:type/:id/:page", component: MovieMoreList, data: { section: "genre" } },
-  { path: "myList", component: MylistComponent },
-  { path: "addToFavList", component: AddtoFavComponent },
-  { path: "addNewMovie", component: AddMovieComponent },
-  { path: ":type/details/:id", component: MovieDetailsComponent },
-  { path: ":type/casts/:id", component: CastListComponent },
-  { path: ":type/reviews/:id", component: ReviewComponent },
-  { path: ":type/videos/:id", component: VideoPageComponent },
-  { path: "server/error", component: PageApiErrorComponent },
+  { path: 'new/:page', component: MovieMoreList, data: { section: 'new' } },
+  {
+    path: 'toprated/:page',
+    component: MovieMoreList,
+    data: { section: 'toprated' },
+  },
+  {
+    path: 'popular/:page',
+    component: MovieMoreList,
+    data: { section: 'popular' },
+  },
+  {
+    path: 'genres/:type/:id/:page',
+    component: MovieMoreList,
+    data: { section: 'genre' },
+  },
+  { path: 'myList', component: MylistComponent },
+  { path: 'addToFavList', component: AddtoFavComponent },
+  { path: 'addNewMovie', component: AddMovieComponent },
+  { path: ':type/details/:id', component: MovieDetailsComponent },
+  { path: ':type/casts/:id', component: CastListComponent },
+  { path: ':type/reviews/:id', component: ReviewComponent },
+  { path: ':type/videos/:id', component: VideoPageComponent },
+  { path: 'server/error', component: PageApiErrorComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

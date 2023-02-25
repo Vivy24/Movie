@@ -1,16 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Cast } from 'src/app/models/model';
 
 @Component({
   selector: 'app-cast',
   templateUrl: './cast.component.html',
-  styleUrls: ['./cast.component.scss']
+  styleUrls: ['./cast.component.scss'],
 })
-export class CastComponent implements OnInit {
+export class CastComponent {
   @Input() castInfo?: Cast;
-  constructor() { }
+  // constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  // ngOnInit(): void {}
 }

@@ -8,9 +8,8 @@ describe('PageApiErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageApiErrorComponent ]
-    })
-    .compileComponents();
+      declarations: [PageApiErrorComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PageApiErrorComponent);
     component = fixture.componentInstance;
