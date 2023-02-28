@@ -52,7 +52,8 @@ export class PaginatorComponent implements OnInit {
       this.showingPage = Array.from({ length: 10 }, (_, i) => i + 1);
     }
   }
-  updateCurrentPage(event: { srcElement: { innerText: number } }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  updateCurrentPage(event: any) {
     this.currentPage =
       event.srcElement.innerText >= 300 ? 300 : event.srcElement.innerText;
     this.previousPage = this.currentPage - 1;

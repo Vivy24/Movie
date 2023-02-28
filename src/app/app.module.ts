@@ -39,6 +39,7 @@ import { TrailerDialogComponent } from './components/dialog/trailer-dialog/trail
 import { PageApiErrorComponent } from './components/page-api-error/page-api-error.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { VideoPageComponent } from './components/pages/video-page/video-page.component';
+import { FooterComponent } from './components/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import { VideoPageComponent } from './components/pages/video-page/video-page.com
     SafePipe,
     PageApiErrorComponent,
     VideoPageComponent,
+    FooterComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

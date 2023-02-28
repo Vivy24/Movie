@@ -68,7 +68,7 @@ export interface Cast {
 export interface Review {
   author: string;
   authorAvatar?: string;
-  rating: number;
+  rating?: number;
   content: string;
   createdAt: Date;
   id: string;

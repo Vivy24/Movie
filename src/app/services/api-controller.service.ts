@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   Cast,
+  Genre,
   Movie,
   MovieDetail,
   movieType,
@@ -250,6 +251,8 @@ export class ApiControllerService {
 
     this.httpClient
       .get<{
+        id: string;
+        adult: boolean;
         homepage: string;
         production_countries: Array<{ iso_3166_1: string }>;
         original_country: string;
@@ -261,6 +264,20 @@ export class ApiControllerService {
           name: string;
           country: string;
         }>;
+        belongs_to_collection: {
+          backdrop_path: string;
+          poster_path: string;
+        };
+        backdrop_path: string;
+        poster_path: string;
+        original_title: string;
+        original_name: string;
+        overview: string;
+        release_date: string;
+        original_language: string;
+        vote_average: number;
+        vote_count: number;
+        popularity: number;
       }>(
         type === 'movie'
           ? `https://api.themoviedb.org/3/movie/${movieID}?api_key=${this.apiKey}&language=en-US`
@@ -270,14 +287,14 @@ export class ApiControllerService {
       .subscribe({
         next: (movieDetail) => {
           // movie;
-          const formattedMovieDetail = {
+          const formattedMovieDetail: MovieDetail = {
             homepage: movieDetail.homepage,
             country: movieDetail.production_countries[0]
               ? movieDetail.production_countries[0].iso_3166_1
               : movieDetail.original_country[0],
             status: movieDetail.status,
             tagline: movieDetail.tagline,
-            genres: movieDetail.genres,
+            genres: movieDetail.genres as unknown as Array<Genre>,
             productions: movieDetail.production_companies.map(
               (company: {
                 logo_path: string;
@@ -293,8 +310,8 @@ export class ApiControllerService {
             ),
           };
 
-          const formattedMovie = {
-            id: movieDetail.id,
+          const formattedMovie: Movie = {
+            id: movieDetail.id as unknown as number,
             adult: movieDetail.adult,
             backdropImage:
               movieDetail.belongs_to_collection !== null
@@ -385,6 +402,12 @@ export class ApiControllerService {
     this.httpClient
       .get<{
         cast: Array<
+          Cast & {
+            profile_path: string;
+            known_for_department: string;
+          }
+        >;
+        crew: Array<
           Cast & {
             profile_path: string;
             known_for_department: string;
@@ -490,13 +513,14 @@ export class ApiControllerService {
     this.movieLoaded$.next(false);
     this.httpClient
       .get<{
-        results: {
+        results: Array<{
           id: string;
           name: string;
           site: string;
           type: string;
-          publishedAt: string;
-        };
+          published_at: string;
+          key: string;
+        }>;
       }>(
         type === 'movie'
           ? `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${this.apiKey}&language=en-US`
@@ -505,28 +529,19 @@ export class ApiControllerService {
       )
       .subscribe({
         next: (data) => {
-          const formattedVideo: Array<Video> = data.results.map(
-            (video: {
-              id: string;
-              name: string;
-              site: string;
-              type: string;
-              key: string;
-              published_at: string;
-            }) => {
-              const formattedVideo: Video = {
-                id: video.id,
-                name: video.name,
-                source:
-                  video.site === 'YouTube'
-                    ? `http://www.youtube.com/embed/${video.key}`
-                    : undefined,
-                type: video.type,
-                publishedAt: new Date(video.published_at),
-              };
-              return formattedVideo;
-            }
-          );
+          const formattedVideo: Array<Video> = data.results.map((video) => {
+            const formattedVideo: Video = {
+              id: video.id,
+              name: video.name,
+              source:
+                video.site === 'YouTube'
+                  ? `http://www.youtube.com/embed/${video.key}`
+                  : undefined,
+              type: video.type,
+              publishedAt: new Date(video.published_at),
+            };
+            return formattedVideo;
+          });
           this.movieDetailVideoList$.next(formattedVideo);
           this.movieLoaded$.next(true);
         },
