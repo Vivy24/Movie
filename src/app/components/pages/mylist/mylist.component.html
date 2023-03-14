@@ -1,1 +1,53 @@
-<p>mylist works!</p>
+<div *ngIf="loadIndicatorService.resourceAndDataLoaded$ | async; else loading">
+  <mat-button-toggle-group name="tvshowMovieToggle" aria-label="Font Style">
+    <mat-button-toggle
+      checked="true"
+      (change)="onValChange($event.value)"
+      value="fav"
+      >Favourite</mat-button-toggle
+    >
+    <mat-button-toggle (change)="onValChange($event.value)" value="save">
+      Save</mat-button-toggle
+    >
+  </mat-button-toggle-group>
+
+  <div *ngIf="this.type === 'favourite'">
+    <h3>Movie</h3>
+    <div *ngFor="let movie of favMovieList">
+      <app-movie-card
+        [movie]="movie"
+        [type]="this.movieType.Movie"
+      ></app-movie-card>
+    </div>
+
+    <h3>Tv Show</h3>
+    <div *ngFor="let movie of favTvshowList">
+      <app-movie-card
+        [movie]="movie"
+        [type]="this.movieType.Tvshow"
+      ></app-movie-card>
+    </div>
+  </div>
+
+  <div *ngIf="this.type === 'save'">
+    <h3>Movie</h3>
+    <div *ngFor="let movie of saveMovieList">
+      <app-movie-card
+        [movie]="movie"
+        [type]="this.movieType.Movie"
+      ></app-movie-card>
+    </div>
+
+    <h3>Tv Show</h3>
+    <div *ngFor="let movie of saveTvshowList">
+      <app-movie-card
+        [movie]="movie"
+        [type]="this.movieType.Tvshow"
+      ></app-movie-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

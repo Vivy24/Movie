@@ -1,0 +1,15 @@
+.movieCard {
+    margin: 30px auto;
+
+    mat-card-content {
+        display: flex !important;
+
+        .content {
+            margin-left: 10px;
+        }
+    }
+
+    background-color: transparent;
+    color: black;
+    width: 700px;
+}

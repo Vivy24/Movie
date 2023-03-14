@@ -151,6 +151,13 @@
     width: 90px !important;
   }
 
+  .added {
+    mat-icon {
+      color: red
+    }
+  }
+
+
   @media (min-width: 400px) {
     .description {
       margin-left: 4em;

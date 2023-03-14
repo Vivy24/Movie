@@ -13,8 +13,6 @@ export class GenresService {
   listOfTvShowGenres$: BehaviorSubject<Array<Genre>> = new BehaviorSubject<
     Array<Genre>
   >([]);
-  // listOfMovieGenres: Array<Genre> = [];
-  // listOfTvShowGenres: Array<Genre> = [];
   apiKey: string = environment.HTTP_API_KEY;
 
   constructor(private httpClient: HttpClient) {}

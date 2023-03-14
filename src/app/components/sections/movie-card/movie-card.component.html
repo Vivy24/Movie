@@ -1,0 +1,13 @@
+<mat-card
+  class="movieCard"
+  *ngIf="movie"
+  [routerLink]="'/' + typeURL + '/details/' + movie.id"
+>
+  <mat-card-content>
+    <div><img class="img" width="100px" [src]="movie.posterImage" /></div>
+    <div class="content">
+      <h4>{{ movie.title }}</h4>
+      <p>{{ movie.overview }}</p>
+    </div>
+  </mat-card-content>
+</mat-card>

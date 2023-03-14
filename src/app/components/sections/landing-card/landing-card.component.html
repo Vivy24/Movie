@@ -37,6 +37,7 @@
               color="primary"
               matTooltip="Add To Watch List"
               aria-label="Watch Later Icon"
+              (click)="markSave()"
             >
               <mat-icon>bookmark</mat-icon>
             </button>
@@ -45,8 +46,9 @@
               color="primary"
               matTooltip="Add To Favorite List"
               aria-label="Favorite Icon"
+              (click)="markFav()"
             >
-              <mat-icon>favorite</mat-icon>
+              <mat-icon id="icon">favorite</mat-icon>
             </button>
 
             <button

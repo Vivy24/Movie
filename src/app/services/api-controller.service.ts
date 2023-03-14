@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { decryptData } from '../helpers/encrypt';
 import {
   Cast,
   Genre,
@@ -109,7 +110,7 @@ export class ApiControllerService {
 
   constructor(private httpClient: HttpClient) {}
 
-  private getMovie(
+  public getMovie(
     url: string,
     variable: BehaviorSubject<Movie[]>,
     type: string
@@ -291,7 +292,9 @@ export class ApiControllerService {
             homepage: movieDetail.homepage,
             country: movieDetail.production_countries[0]
               ? movieDetail.production_countries[0].iso_3166_1
-              : movieDetail.original_country[0],
+              : movieDetail.original_country
+              ? movieDetail.original_country[0]
+              : 'Unknown',
             status: movieDetail.status,
             tagline: movieDetail.tagline,
             genres: movieDetail.genres as unknown as Array<Genre>,
@@ -314,11 +317,13 @@ export class ApiControllerService {
             id: movieDetail.id as unknown as number,
             adult: movieDetail.adult,
             backdropImage:
-              movieDetail.belongs_to_collection !== null
+              movieDetail.belongs_to_collection &&
+              `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.belongs_to_collection.backdrop_path}`
                 ? `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.belongs_to_collection.backdrop_path}`
                 : `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.backdrop_path}`,
             posterImage:
-              movieDetail.belongs_to_collection !== null
+              movieDetail.belongs_to_collection &&
+              `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.belongs_to_collection.poster_path}`
                 ? `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.belongs_to_collection.poster_path}`
                 : `${environment.HTTP_ORIGINAL_IMAGE}${movieDetail.poster_path}`,
             title: movieDetail.original_title || movieDetail.original_name,
@@ -549,5 +554,47 @@ export class ApiControllerService {
           this.hasError$.next(true);
         },
       });
+  }
+
+  public markAsFavourite(
+    encryptedAccountID: string,
+    encryptedSessionID: string,
+    movieType: string,
+    movieID: string
+  ) {
+    const accountID = decryptData(encryptedAccountID);
+    const sessionID = decryptData(encryptedSessionID);
+    this.httpClient.post<{
+      status_code: number;
+      status_message: string;
+    }>(
+      `https://api.themoviedb.org/3/account/${accountID}/favorite?api_key=${environment.HTTP_API_KEY}&session_id=${sessionID}`,
+      {
+        media_type: movieType,
+        media_id: movieID,
+        favorite: true,
+      }
+    );
+  }
+
+  public markAsSave(
+    encryptedAccountID: string,
+    encryptedSessionID: string,
+    movieType: string,
+    movieID: string
+  ) {
+    const accountID = decryptData(encryptedAccountID);
+    const sessionID = decryptData(encryptedSessionID);
+    this.httpClient.post<{
+      status_code: number;
+      status_message: string;
+    }>(
+      `https://api.themoviedb.org/3/account/${accountID}/watchlist?api_key=${environment.HTTP_API_KEY}&session_id=${sessionID}`,
+      {
+        media_type: movieType,
+        media_id: movieID,
+        watchlist: true,
+      }
+    );
   }
 }

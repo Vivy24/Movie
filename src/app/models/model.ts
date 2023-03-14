@@ -74,3 +74,9 @@ export interface Review {
   id: string;
   url: string;
 }
+
+export interface userToken {
+  request_token: string;
+  success: boolean;
+  expires_at: string;
+}

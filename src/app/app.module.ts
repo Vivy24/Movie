@@ -40,6 +40,10 @@ import { PageApiErrorComponent } from './components/page-api-error/page-api-erro
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { VideoPageComponent } from './components/pages/video-page/video-page.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AuthenticationPageComponent } from './components/pages/authentication-page/authentication-page.component';
+import { AuthorizePageComponent } from './components/pages/authorize-page/authorize-page.component';
+import { AnnouncementComponent } from './components/dialog/announcement/announcement.component';
+import { MovieCardComponent } from './components/sections/movie-card/movie-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +69,10 @@ import { FooterComponent } from './components/footer/footer.component';
     PageApiErrorComponent,
     VideoPageComponent,
     FooterComponent,
+    AuthenticationPageComponent,
+    AuthorizePageComponent,
+    AnnouncementComponent,
+    MovieCardComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

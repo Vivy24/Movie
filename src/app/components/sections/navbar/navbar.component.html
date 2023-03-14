@@ -103,17 +103,5 @@
   </div>
   <div class="right">
     <a routerLink="/myList">My List</a>
-    <span
-      class="openMenu"
-      [matMenuTriggerFor]="menu"
-      aria-label="profile-label"
-    >
-      Profile
-    </span>
-    <mat-menu #menu="matMenu">
-      <a mat-menu-item routerLink="/addToFavList">Add To Favorite List</a>
-      <a mat-menu-item routerLink="/addNewMovie">Add New Movie</a>
-      <!-- <a mat-menu-item href="/">Change My Account</a> -->
-    </mat-menu>
   </div>
 </mat-toolbar>

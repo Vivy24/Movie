@@ -11,6 +11,9 @@ import { CastListComponent } from './components/pages/cast-list/cast-list.compon
 import { ReviewComponent } from './components/pages/review/review.component';
 import { PageApiErrorComponent } from './components/page-api-error/page-api-error.component';
 import { VideoPageComponent } from './components/pages/video-page/video-page.component';
+import { AuthenticationPageComponent } from './components/pages/authentication-page/authentication-page.component';
+import { AuthGuard } from './helpers/authentication';
+import { AuthorizePageComponent } from './components/pages/authorize-page/authorize-page.component';
 
 const routes: Routes = [
   { path: 'home', component: MainpageComponent },
@@ -30,7 +33,11 @@ const routes: Routes = [
     component: MovieMoreList,
     data: { section: 'genre' },
   },
-  { path: 'myList', component: MylistComponent },
+  {
+    path: 'myList',
+    component: MylistComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'addToFavList', component: AddtoFavComponent },
   { path: 'addNewMovie', component: AddMovieComponent },
   { path: ':type/details/:id', component: MovieDetailsComponent },
@@ -38,6 +45,8 @@ const routes: Routes = [
   { path: ':type/reviews/:id', component: ReviewComponent },
   { path: ':type/videos/:id', component: VideoPageComponent },
   { path: 'server/error', component: PageApiErrorComponent },
+  { path: 'authentication', component: AuthenticationPageComponent },
+  { path: 'authorized', component: AuthorizePageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
