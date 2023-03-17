@@ -43,15 +43,12 @@ export class MainpageComponent implements OnInit {
             );
           this.latestMovie = this.trendingMoviesList[0];
         },
-        // error: (error) => {},
       });
 
     this.apiController.movieDetail$.pipe(filter((movie) => !!movie)).subscribe({
       next: (movieDetail) => {
         this.latestMovieDetail = movieDetail;
       },
-      // error: (error) => {
-      //   console.log(error);
       // },
     });
 
@@ -61,7 +58,6 @@ export class MainpageComponent implements OnInit {
         next: (listOfMovie) => {
           this.onAirMoviesList = listOfMovie;
         },
-        // error: (error) => {},
       });
 
     this.apiController.topRatedMovie$
@@ -70,7 +66,6 @@ export class MainpageComponent implements OnInit {
         next: (listOfMovie) => {
           this.topRatedMovieList = listOfMovie;
         },
-        // error: (error) => {},
       });
 
     this.apiController.trendingWeekTvshow$
@@ -79,7 +74,6 @@ export class MainpageComponent implements OnInit {
         next: (listOfTvShow) => {
           this.trendingTvshowsList = listOfTvShow;
         },
-        // error: (error) => {},
       });
 
     this.apiController.nowPlayingTvshow$
@@ -88,7 +82,6 @@ export class MainpageComponent implements OnInit {
         next: (listOfMovie) => {
           this.onAirTvShowsList = listOfMovie;
         },
-        // error: (error) => {},
       });
 
     this.apiController.topRatedTvshow$
@@ -97,15 +90,6 @@ export class MainpageComponent implements OnInit {
         next: (listOfMovie) => {
           this.topRatedTvShowList = listOfMovie;
         },
-        // error: (error) => {},
       });
-
-    // this.loadIndicatorService.criticalError$.pipe(filter(error => !!error)).subscribe({
-    //   next: hasError => {
-    //     if (hasError) {
-    //       this.router.navigateByUrl('/server/error')
-    //     }
-    //   }
-    // })
   }
 }

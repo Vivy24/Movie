@@ -27,11 +27,7 @@ export class GenresService {
       .subscribe({
         next: (data) => {
           this.listOfMovieGenres$.next(data.genres as Array<Genre>);
-          // this.listOfMovieGenres = data.genres as Array<Genre>
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
   }
 
@@ -46,11 +42,7 @@ export class GenresService {
       .subscribe({
         next: (data) => {
           this.listOfTvShowGenres$.next(data.genres as Array<Genre>);
-          // this.listOfTvShowGenres = data.genres as Array<Genre>;
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
   }
 }

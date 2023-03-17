@@ -8,8 +8,7 @@ export class AuthGuard implements CanActivate {
   canActivate() {
     if (
       !localStorage.getItem('sessionID') ||
-      !localStorage.getItem('accountID') ||
-      !localStorage.getItem('tokenID')
+      !localStorage.getItem('accountID')
     ) {
       // role not authorised so redirect to home page
       this.router.navigate(['/authentication']);

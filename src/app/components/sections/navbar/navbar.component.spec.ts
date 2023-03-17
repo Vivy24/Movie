@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NavbarComponent } from './navbar.component';
 
@@ -8,6 +11,7 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientModule, MatMenuModule, MatToolbarModule],
       declarations: [NavbarComponent],
     }).compileComponents();
 

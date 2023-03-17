@@ -1,103 +1,114 @@
-<div *ngIf="loadIndicatorService.resourceAndDataLoaded$ | async">
-  <div *ngIf="this.movieDetail && this.movie">
-    <app-landing-card
-      [movie]="this.movie"
-      [movieDetail]="this.movieDetail"
-      [type]="this.type"
-      [trailer]="this.trailer"
-    ></app-landing-card>
+<div *ngIf="this.error; else loadMovie">
+  <div class="errorPage">
+    <h2>404 Resource Not Available</h2>
+    <p>Unfortunately, this movie does not have the detail information</p>
+    <a [routerLink]="'/home'">Go back home</a>
+  </div>
+</div>
 
-    <div class="information">
-      <div class="castSection" *ngIf="castList && castList.length > 0">
-        <div class="title">
-          <h2>
-            Cast & Crew
-            <a [routerLink]="'/' + type + '/casts/' + movieId"
-              >See Full Casts</a
-            >
-          </h2>
-        </div>
+<ng-template #loadMovie>
+  <div *ngIf="loadIndicatorService.resourceAndDataLoaded$ | async">
+    <div *ngIf="this.movieDetail && this.movie">
+      <app-landing-card
+        [movie]="this.movie"
+        [movieDetail]="this.movieDetail"
+        [type]="this.type"
+        [trailer]="this.trailer"
+      ></app-landing-card>
 
-        <div class="castList">
-          <ng-container *ngFor="let cast of castList">
-            <app-cast
-              class="cast"
-              *ngIf="!cast.profilePath?.includes('null')"
-              [castInfo]="cast"
-            ></app-cast>
-          </ng-container>
-        </div>
-      </div>
-
-      <div class="reviewSection">
-        <div class="title">
-          <h2>
-            Reviews
-            <a
-              *ngIf="reviewList && reviewList.length > 0"
-              [routerLink]="'/' + type + '/reviews/' + movieId"
-              >See Full Reviews</a
-            >
-          </h2>
-        </div>
-
-        <div class="reviewList">
-          <ng-container
-            *ngIf="reviewList && reviewList.length > 0; else noReview"
-          >
-            <app-reviews-card [reviewInfo]="reviewList[0]"> </app-reviews-card>
-          </ng-container>
-          <ng-template #noReview>
-            <p>No review yet</p>
-          </ng-template>
-        </div>
-      </div>
-
-      <div class="videoFilm">
-        <div class="title">
-          <h2>
-            Videos {{ movieVideoList?.length }}
-            <a
-              *ngIf="movieVideoList && movieVideoList.length > 1"
-              [routerLink]="'/' + type + '/videos/' + movieId"
-              >See Full Video
-            </a>
-          </h2>
-          <div
-            class="videoInfo"
-            *ngIf="movieVideoList && movieVideoList.length > 0; else noVideo"
-          >
-            <iframe
-              class="mainVideo"
-              width="400"
-              height="300"
-              *ngIf="firstVideo"
-              [src]="firstVideo.source! | safe : 'resourceUrl'"
-              allowfullscreen
-            ></iframe>
+      <div class="information">
+        <div class="castSection" *ngIf="castList && castList.length > 0">
+          <div class="title">
+            <h2>
+              Cast & Crew
+              <a [routerLink]="'/' + type + '/casts/' + movieId"
+                >See Full Casts</a
+              >
+            </h2>
           </div>
 
-          <ng-template #noVideo>
-            <p>No videos yet</p>
-          </ng-template>
+          <div class="castList">
+            <ng-container *ngFor="let cast of castList">
+              <app-cast
+                class="cast"
+                *ngIf="!cast.profilePath?.includes('null')"
+                [castInfo]="cast"
+              ></app-cast>
+            </ng-container>
+          </div>
         </div>
-      </div>
 
-      <div class="recommendationsFilm">
-        <div class="title">
-          <h2>Recommendations</h2>
-          <app-slideshow
-            *ngIf="
-              movieRecommendationList && movieRecommendationList.length > 0;
-              else noRecommendation
-            "
-            [movieList]="this.movieRecommendationList"
-          ></app-slideshow>
-          <ng-template #noRecommendation>
-            <p>No recommendation yet</p>
-          </ng-template>
+        <div class="reviewSection">
+          <div class="title">
+            <h2>
+              Reviews
+              <a
+                *ngIf="reviewList && reviewList.length > 0"
+                [routerLink]="'/' + type + '/reviews/' + movieId"
+                >See Full Reviews</a
+              >
+            </h2>
+          </div>
+
+          <div class="reviewList">
+            <ng-container
+              *ngIf="reviewList && reviewList.length > 0; else noReview"
+            >
+              <app-reviews-card [reviewInfo]="reviewList[0]">
+              </app-reviews-card>
+            </ng-container>
+            <ng-template #noReview>
+              <p>No review yet</p>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="videoFilm">
+          <div class="title">
+            <h2>
+              Videos {{ movieVideoList?.length }}
+              <a
+                *ngIf="movieVideoList && movieVideoList.length > 1"
+                [routerLink]="'/' + type + '/videos/' + movieId"
+                >See Full Video
+              </a>
+            </h2>
+            <div
+              class="videoInfo"
+              *ngIf="movieVideoList && movieVideoList.length > 0; else noVideo"
+            >
+              <iframe
+                class="mainVideo"
+                width="400"
+                height="300"
+                *ngIf="firstVideo"
+                [src]="firstVideo.source! | safe : 'resourceUrl'"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <ng-template #noVideo>
+              <p>No videos yet</p>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="recommendationsFilm">
+          <div class="title">
+            <h2>Recommendations</h2>
+            <app-slideshow
+              *ngIf="
+                movieRecommendationList && movieRecommendationList.length > 0;
+                else noRecommendation
+              "
+              [movieList]="this.movieRecommendationList"
+            ></app-slideshow>
+            <ng-template #noRecommendation>
+              <p>No recommendation yet</p>
+            </ng-template>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>

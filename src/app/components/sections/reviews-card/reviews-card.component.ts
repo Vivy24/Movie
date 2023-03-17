@@ -9,10 +9,8 @@ import { Review } from 'src/app/models/model';
 export class ReviewsCardComponent implements OnInit {
   @Input() reviewInfo?: Review;
   reviewDate?: string;
-  // constructor() {}
 
   ngOnInit(): void {
-    // console.log(this.reviewInfo?.authorAvatar);
     this.reviewDate =
       this.reviewInfo &&
       `${this.reviewInfo.createdAt.getFullYear()} - ${

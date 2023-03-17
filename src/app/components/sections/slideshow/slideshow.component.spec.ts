@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CarouselComponent } from 'carousel-angular';
 
 import { SlideshowComponent } from './slideshow.component';
 
@@ -8,7 +9,7 @@ describe('SlideshowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SlideshowComponent],
+      declarations: [SlideshowComponent, CarouselComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SlideshowComponent);

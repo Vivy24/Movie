@@ -37,9 +37,6 @@ export class NavbarComponent implements OnInit {
         next: (genre) => {
           this.listOfMovieGenre = genre;
         },
-        // error: () => {
-        //   // console.log(error);
-        // },
       });
 
     this.genresService.listOfTvShowGenres$
@@ -48,9 +45,6 @@ export class NavbarComponent implements OnInit {
         next: (genre) => {
           this.listOfTvShowGenre = genre;
         },
-        // error: (error) => {
-        //   // console.log(error);
-        // },
       });
   }
 

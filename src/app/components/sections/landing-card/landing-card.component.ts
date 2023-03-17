@@ -32,12 +32,8 @@ export class LandingCardComponent {
 
   // }
   openTrailer(): void {
-    const dialogRef = this.dialog.open(TrailerDialogComponent, {
+    this.dialog.open(TrailerDialogComponent, {
       data: { youtubeSrc: this.trailer?.source },
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      // console.log('The dialog was closed');
     });
   }
 
@@ -81,9 +77,6 @@ export class LandingCardComponent {
                 this.addingFav = false;
               }
             },
-            // error: (error) => {
-            //   console.log(error);
-            // },
           });
       } else {
         this.listService.getFavouriteTvshowList(
@@ -120,9 +113,6 @@ export class LandingCardComponent {
                 this.addingFav = false;
               }
             },
-            // error: (error) => {
-            //   console.log(error);
-            // },
           });
       }
     } else {
@@ -170,9 +160,6 @@ export class LandingCardComponent {
                 this.addingSave = false;
               }
             },
-            // error: (error) => {
-            //   console.log(error);
-            // },
           });
       } else {
         this.listService.getSavedTvshowList(
@@ -209,9 +196,6 @@ export class LandingCardComponent {
                 this.addingSave = false;
               }
             },
-            // error: (error) => {
-            //   console.log(error);
-            // },
           });
       }
     } else {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,8 +14,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
-import { AddtoFavComponent } from './components/pages/Page/List/addto-fav/addto-fav.component';
-import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-movie.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LandingCardComponent } from './components/sections/landing-card/landing-card.component';
 import { ItemCardComponent } from './components/sections/item-card/item-card.component';
@@ -36,7 +34,7 @@ import { ReviewsCardComponent } from './components/sections/reviews-card/reviews
 import { ReviewComponent } from './components/pages/review/review.component';
 import { SafePipe } from './pipe/safe.pipe';
 import { TrailerDialogComponent } from './components/dialog/trailer-dialog/trailer-dialog.component';
-import { PageApiErrorComponent } from './components/page-api-error/page-api-error.component';
+import { PageApiErrorComponent } from './components/pages/page-api-error/page-api-error.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { VideoPageComponent } from './components/pages/video-page/video-page.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -44,6 +42,8 @@ import { AuthenticationPageComponent } from './components/pages/authentication-p
 import { AuthorizePageComponent } from './components/pages/authorize-page/authorize-page.component';
 import { AnnouncementComponent } from './components/dialog/announcement/announcement.component';
 import { MovieCardComponent } from './components/sections/movie-card/movie-card.component';
+
+export const WINDOW = new InjectionToken('WINDOW');
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,8 +53,6 @@ import { MovieCardComponent } from './components/sections/movie-card/movie-card.
     NavbarComponent,
     SlideshowComponent,
     PageNotFoundComponent,
-    AddtoFavComponent,
-    AddMovieComponent,
     LandingCardComponent,
     ItemCardComponent,
     MovieMoreList,
@@ -74,7 +72,12 @@ import { MovieCardComponent } from './components/sections/movie-card/movie-card.
     AnnouncementComponent,
     MovieCardComponent,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: WINDOW,
+      useValue: window,
+    },
+  ],
   bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,

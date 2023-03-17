@@ -155,8 +155,12 @@ export class ApiControllerService {
               const formatMovie: Movie = {
                 id: movie.id,
                 adult: movie.adult,
-                backdropImage: `${environment.HTTP_ORIGINAL_IMAGE}${movie.backdrop_path}`,
-                posterImage: `${environment.HTTP_ORIGINAL_IMAGE}${movie.poster_path}`,
+                backdropImage: movie.backdrop_path
+                  ? `${environment.HTTP_ORIGINAL_IMAGE}${movie.backdrop_path}`
+                  : undefined,
+                posterImage: movie.poster_path
+                  ? `${environment.HTTP_ORIGINAL_IMAGE}${movie.poster_path}`
+                  : undefined,
                 title: movie.original_title || movie.original_name,
                 overview: movie.overview,
                 release_date: movie.release_date,
@@ -312,7 +316,6 @@ export class ApiControllerService {
               }
             ),
           };
-
           const formattedMovie: Movie = {
             id: movieDetail.id as unknown as number,
             adult: movieDetail.adult,

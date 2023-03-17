@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { filter } from 'rxjs';
+import { WINDOW } from 'src/app/app.module';
 import { Movie, movieType } from 'src/app/models/model';
 import { ListService } from 'src/app/services/list.service';
 import { LoadIndicatorService } from 'src/app/services/load-indicator.service';
@@ -17,12 +18,13 @@ export class MylistComponent implements OnInit {
   type = 'favourite';
   movieType = movieType;
   constructor(
+    @Inject(WINDOW) private window: Window,
     private listService: ListService,
     public loadIndicatorService: LoadIndicatorService
   ) {
     if (!localStorage.getItem('reload')) {
       localStorage.setItem('reload', 'no reload');
-      location.reload();
+      this.window.location.reload();
     } else {
       localStorage.removeItem('reload');
     }
@@ -32,58 +34,56 @@ export class MylistComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.listService.getFavouriteMovieList(
-      localStorage.getItem('sessionID') as string,
-      localStorage.getItem('accountID') as string
-    );
-    this.listService.getFavouriteTvshowList(
-      localStorage.getItem('sessionID') as string,
-      localStorage.getItem('accountID') as string
-    );
+    if (localStorage.getItem('sessionID')) {
+      this.listService.getFavouriteMovieList(
+        localStorage.getItem('sessionID') as string,
+        localStorage.getItem('accountID') as string
+      );
+      this.listService.getFavouriteTvshowList(
+        localStorage.getItem('sessionID') as string,
+        localStorage.getItem('accountID') as string
+      );
 
-    this.listService.getSavedMovieList(
-      localStorage.getItem('sessionID') as string,
-      localStorage.getItem('accountID') as string
-    );
+      this.listService.getSavedMovieList(
+        localStorage.getItem('sessionID') as string,
+        localStorage.getItem('accountID') as string
+      );
 
-    this.listService.getSavedTvshowList(
-      localStorage.getItem('sessionID') as string,
-      localStorage.getItem('accountID') as string
-    );
+      this.listService.getSavedTvshowList(
+        localStorage.getItem('sessionID') as string,
+        localStorage.getItem('accountID') as string
+      );
 
-    this.listService.favMovieList$.pipe(filter((movie) => !!movie)).subscribe({
-      next: (listOfMovie) => {
-        this.favMovieList = listOfMovie;
-      },
-      // error: (error) => {
-      //   console.log(error);
-      // },
-    });
-    this.listService.favTvshowList$.pipe(filter((movie) => !!movie)).subscribe({
-      next: (listOfMovie) => {
-        this.favTvshowList = listOfMovie;
-      },
-      // error: (error) => {
-      //   console.log(error);
-      // },
-    });
+      this.listService.favMovieList$
+        .pipe(filter((movie) => !!movie))
+        .subscribe({
+          next: (listOfMovie) => {
+            this.favMovieList = listOfMovie;
+          },
+        });
+      this.listService.favTvshowList$
+        .pipe(filter((movie) => !!movie))
+        .subscribe({
+          next: (listOfMovie) => {
+            this.favTvshowList = listOfMovie;
+          },
+        });
 
-    this.listService.saveMovieList$.pipe(filter((movie) => !!movie)).subscribe({
-      next: (listOfMovie) => {
-        this.saveMovieList = listOfMovie;
-      },
-      // error: (error) => {
-      //   console.log(error);
-      // },
-    });
+      this.listService.saveMovieList$
+        .pipe(filter((movie) => !!movie))
+        .subscribe({
+          next: (listOfMovie) => {
+            this.saveMovieList = listOfMovie;
+          },
+        });
 
-    this.listService.saveMovieList$.pipe(filter((movie) => !!movie)).subscribe({
-      next: (listOfMovie) => {
-        this.saveTvshowList = listOfMovie;
-      },
-      // error: (error) => {
-      //   console.log(error);
-      // },
-    });
+      this.listService.saveMovieList$
+        .pipe(filter((movie) => !!movie))
+        .subscribe({
+          next: (listOfMovie) => {
+            this.saveTvshowList = listOfMovie;
+          },
+        });
+    }
   }
 }

@@ -5,11 +5,9 @@ import { MainpageComponent } from './components/pages/mainpage/mainpage.componen
 import { MovieDetailsComponent } from './components/pages/movie-details/movie-details.component';
 import { MylistComponent } from './components/pages/mylist/mylist.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
-import { AddMovieComponent } from './components/pages/Page/List/add-movie/add-movie.component';
-import { AddtoFavComponent } from './components/pages/Page/List/addto-fav/addto-fav.component';
 import { CastListComponent } from './components/pages/cast-list/cast-list.component';
 import { ReviewComponent } from './components/pages/review/review.component';
-import { PageApiErrorComponent } from './components/page-api-error/page-api-error.component';
+import { PageApiErrorComponent } from './components/pages/page-api-error/page-api-error.component';
 import { VideoPageComponent } from './components/pages/video-page/video-page.component';
 import { AuthenticationPageComponent } from './components/pages/authentication-page/authentication-page.component';
 import { AuthGuard } from './helpers/authentication';
@@ -38,8 +36,7 @@ const routes: Routes = [
     component: MylistComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'addToFavList', component: AddtoFavComponent },
-  { path: 'addNewMovie', component: AddMovieComponent },
+
   { path: ':type/details/:id', component: MovieDetailsComponent },
   { path: ':type/casts/:id', component: CastListComponent },
   { path: ':type/reviews/:id', component: ReviewComponent },

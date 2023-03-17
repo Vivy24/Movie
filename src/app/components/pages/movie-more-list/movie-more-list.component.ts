@@ -91,9 +91,6 @@ export class MovieMoreList implements OnInit {
           this.listOfShowMovie = listOfMovie;
         }
       },
-      // error: (error) => {
-      //   console.log(error);
-      // },
     });
 
     this.apiController.trendingWeekMovie$
@@ -103,9 +100,6 @@ export class MovieMoreList implements OnInit {
           this.listOfMovie = listOfMovie;
           this.updateMovies();
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
     this.apiController.nowPlayingMovie$
       .pipe(filter((movie) => !!movie))
@@ -114,9 +108,6 @@ export class MovieMoreList implements OnInit {
           this.listOfMovie = listOfMovie;
           this.updateMovies();
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
 
     this.apiController.topRatedMovie$
@@ -126,9 +117,6 @@ export class MovieMoreList implements OnInit {
           this.listOfMovie = listOfMovie;
           this.updateMovies();
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
 
     this.apiController.trendingWeekTvshow$
@@ -138,9 +126,6 @@ export class MovieMoreList implements OnInit {
           this.listOfTvShow = listOfTvShow;
           this.updateMovies();
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
 
     this.apiController.nowPlayingTvshow$
@@ -150,9 +135,6 @@ export class MovieMoreList implements OnInit {
           this.listOfTvShow = listOfMovie;
           this.updateMovies();
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
 
     this.apiController.topRatedTvshow$
@@ -162,9 +144,6 @@ export class MovieMoreList implements OnInit {
           this.listOfTvShow = listOfMovie;
           this.updateMovies();
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
   }
   onValChange = (value: string) => {

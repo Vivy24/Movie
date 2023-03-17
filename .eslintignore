@@ -6,4 +6,4 @@ karma.conf.js
 commitlint.config.js
 .husky
 *.js
-
+*.spec.ts

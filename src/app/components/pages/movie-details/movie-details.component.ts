@@ -21,6 +21,7 @@ export class MovieDetailsComponent implements OnInit {
   movieVideoList?: Array<Video>;
   trailer?: Video;
   firstVideo?: Video;
+  error = false;
   constructor(
     route: ActivatedRoute,
     private apiController: ApiControllerService,
@@ -40,15 +41,19 @@ export class MovieDetailsComponent implements OnInit {
     this.apiController.movieSingle$.pipe(filter((movie) => !!movie)).subscribe({
       next: (movie) => {
         this.movie = movie;
+        if (
+          this.movie.backdropImage?.includes('null') ||
+          this.movie.posterImage?.includes('null')
+        ) {
+          this.error = true;
+        }
       },
-      // error: (error) => {},
     });
 
     this.apiController.movieDetail$.pipe(filter((movie) => !!movie)).subscribe({
       next: (movieDetail) => {
         this.movieDetail = movieDetail;
       },
-      // error: (error) => {},
     });
 
     this.apiController.movieDetailsCast$
@@ -57,7 +62,6 @@ export class MovieDetailsComponent implements OnInit {
         next: (listOfCast) => {
           this.castList = listOfCast;
         },
-        // error: (error) => {},
       });
 
     this.apiController.movieDetailReviewList$
@@ -66,7 +70,6 @@ export class MovieDetailsComponent implements OnInit {
         next: (reviewList) => {
           this.reviewList = reviewList;
         },
-        // error: (error) => {},
       });
 
     this.apiController.recommendationMovieList$
@@ -75,7 +78,6 @@ export class MovieDetailsComponent implements OnInit {
         next: (movieList) => {
           this.movieRecommendationList = movieList;
         },
-        // error: (error) => {},
       });
 
     this.apiController.movieDetailVideoList$
@@ -83,13 +85,11 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe({
         next: (videoList) => {
           this.movieVideoList = videoList;
-          // console.log(this.movieVideoList);
           this.trailer = videoList.find((video) => {
             return video.type === 'Trailer';
           });
           this.firstVideo = this.movieVideoList[0];
         },
-        // error: (error) => {},
       });
   }
 }

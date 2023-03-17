@@ -31,9 +31,6 @@ export class ReviewComponent implements OnInit {
         next: (reviewList) => {
           this.reviewList = reviewList;
         },
-        // error: (error) => {
-        //   console.log(error);
-        // },
       });
   }
 }

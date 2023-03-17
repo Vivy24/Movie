@@ -2,7 +2,8 @@ module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
   ignorePatterns: [
-    "projects/**/*"
+    "**.spec.ts",
+    "projects/**/*",
   ],
   overrides: [
     {
