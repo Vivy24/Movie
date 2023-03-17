@@ -1,4 +1,4 @@
-// import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientTestingModule } from '@angular/common/http';
 // import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 // import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -21,7 +21,7 @@
 
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       imports: [HttpClientModule, MatIconModule],
+//       imports: [HttpClientTestingModule, MatIconModule],
 //       declarations: [LandingCardComponent, CircleProgressComponent],
 //       providers: [
 //         {

@@ -24,7 +24,7 @@ export class MovieDetailsComponent implements OnInit {
   error = false;
   constructor(
     route: ActivatedRoute,
-    private apiController: ApiControllerService,
+    public apiController: ApiControllerService,
     public loadIndicatorService: LoadIndicatorService
   ) {
     route.params.subscribe((val) => {

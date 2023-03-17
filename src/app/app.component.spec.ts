@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -11,9 +11,16 @@ class FooterComponent {}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
+    const mockWindow = { location: { href: '' } };
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule],
+      imports: [RouterTestingModule, HttpClientTestingModule],
       declarations: [AppComponent, FooterComponent],
+      providers: [
+        {
+          provide: 'Window',
+          useValue: mockWindow,
+        },
+      ],
     }).compileComponents();
   });
 

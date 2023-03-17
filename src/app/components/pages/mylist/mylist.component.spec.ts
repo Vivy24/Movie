@@ -1,4 +1,4 @@
-// import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientTestingModule } from '@angular/common/http';
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 // import { MatButtonToggleModule } from '@angular/material/button-toggle';
 // import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -12,7 +12,7 @@
 
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       imports: [HttpClientModule, MatProgressSpinnerModule, MatButtonToggleModule],
+//       imports: [HttpClientTestingModule, MatProgressSpinnerModule, MatButtonToggleModule],
 //       declarations: [MylistComponent],
 //       providers: [
 //         {

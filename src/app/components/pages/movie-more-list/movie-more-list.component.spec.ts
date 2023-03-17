@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,7 +27,11 @@ describe('MovieMoreList', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule, MatButtonToggleModule],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatButtonToggleModule,
+      ],
       declarations: [MovieMoreList, PaginatorComponent],
     }).compileComponents();
 

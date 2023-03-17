@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { By } from '@angular/platform-browser';
 
 import { AnnouncementComponent } from './announcement.component';
 
@@ -29,5 +30,13 @@ describe('AnnouncementComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render the content based on data content', () => {
+    const content = 'Announcement Testing';
+    component.data.content = content;
+    fixture.detectChanges();
+    const para = fixture.debugElement.query(By.css('p')).nativeElement;
+    expect(para.textContent).toEqual(content);
   });
 });
