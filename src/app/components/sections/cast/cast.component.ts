@@ -8,7 +8,4 @@ import { Cast } from 'src/app/models/model';
 })
 export class CastComponent {
   @Input() castInfo?: Cast;
-  // constructor() {}
-
-  // ngOnInit(): void {}
 }

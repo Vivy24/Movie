@@ -57,7 +57,7 @@ export class PaginatorComponent implements OnInit {
     this.currentPage =
       event.srcElement.innerText >= 300 ? 300 : event.srcElement.innerText;
     this.previousPage = this.currentPage - 1;
-    this.nextPage = +this.currentPage + 1;
+    this.nextPage = this.currentPage === 300 ? 300 : +this.currentPage + 1;
     this.updateShowPage();
   }
 

@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { sample } from 'rxjs';
+import { sampleMovie } from 'src/mockedData/movie';
 
 import { MovieCardComponent } from './movie-card.component';
 
@@ -18,5 +21,13 @@ describe('MovieCardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should render content match with the component', () => {
+    component.movie = sampleMovie;
+    fixture.detectChanges();
+    expect(
+      fixture.debugElement.query(By.css('.content h4')).nativeElement
+        .textContent
+    ).toEqual(sampleMovie.title);
   });
 });

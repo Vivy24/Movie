@@ -159,3 +159,26 @@ export const recommendationsMovie = [
     vote_count: 181,
   },
 ];
+export const sampleCast = {
+  profilePath: 'profilePath',
+  character: 'sample character',
+  department: 'Actor',
+  name: 'Song Ji Hyo',
+  id: 13551,
+};
+
+export const sampleReview = {
+  author: 'Vivy Vuong',
+  content: 'This is a sample review',
+  createdAt: new Date(),
+  id: '231321',
+  url: 'sampleurl',
+};
+
+export const sampleVideo = {
+  id: '12121',
+  name: 'Trailer',
+  source: 'sampleSource',
+  type: 'trailer',
+  publishedAt: new Date(),
+};

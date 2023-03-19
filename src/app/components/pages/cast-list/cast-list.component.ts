@@ -33,7 +33,6 @@ export class CastListComponent implements OnInit {
         next: (castList) => {
           this.castArray = castList;
         },
-        // error: () => {},
       });
 
     this.apiController.movieDetailCrew$
@@ -42,7 +41,6 @@ export class CastListComponent implements OnInit {
         next: (crewList) => {
           this.crewArray = crewList;
         },
-        // error: () => {},
       });
   }
 }
