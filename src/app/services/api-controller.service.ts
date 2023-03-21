@@ -342,18 +342,6 @@ export class ApiControllerService {
           this.movieDetail$.next(formattedMovieDetail);
           this.movieSingle$.next(formattedMovie);
           this.movieLoaded$.next(true);
-
-          // provider
-          // this.httpClient.get<any>(`https://api.themoviedb.org/3/movie/${movieID}/watch/providers?api_key=${this.apiKey}`, {
-
-          // }).subscribe({
-          //   next: subInfo => {
-
-          //     if (subInfo.result) {
-
-          //     }
-          //   }
-          // })
         },
         error: () => {
           this.hasError$.next(true);
