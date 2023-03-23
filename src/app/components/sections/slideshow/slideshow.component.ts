@@ -1,4 +1,11 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { Movie } from 'src/app/models/model';
 
 @Component({
@@ -7,18 +14,29 @@ import { Movie } from 'src/app/models/model';
   styleUrls: ['./slideshow.component.scss'],
 })
 export class SlideshowComponent implements OnInit {
+  @ViewChild('slickModal') slickModal: SlickCarouselComponent | undefined;
+
   @Input() title?: string;
-  @Input() movieList?: Array<Movie>;
+  @Input() movieList: Array<Movie> = [];
   @Input() tvShowList?: Array<Movie>;
-  renderMoviesList?: Array<Movie>;
+  renderMoviesList: Array<Movie> = [];
   innerWidth?: number;
   numberOfCells = 0;
   type?: string = 'movie';
-  // constructor() {}
+  slideConfig = {
+    dots: true,
+    arrow: true,
+    infinite: true,
+    lazyLoad: 'ondemand',
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
 
+  constructor() {
+    this.onResize();
+  }
   ngOnInit(): void {
-    this.renderMoviesList = this.movieList;
-    this.setNumberOfCells();
+    this.renderMoviesList = this.movieList as Array<Movie>;
   }
 
   setNumberOfCells = () => {
@@ -34,13 +52,27 @@ export class SlideshowComponent implements OnInit {
     }
   };
 
+  next() {
+    this.slickModal?.slickNext();
+  }
+
+  prev() {
+    this.slickModal?.slickPrev();
+  }
+
   onValChange = (value: string) => {
     this.type = value;
     this.renderMoviesList =
-      this.type === 'movie' ? this.movieList : this.tvShowList;
+      this.type === 'movie'
+        ? (this.movieList as Array<Movie>)
+        : (this.tvShowList as Array<Movie>);
   };
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.setNumberOfCells();
+    if (this.numberOfCells) {
+      this.slideConfig.slidesToShow = this.numberOfCells;
+      this.slideConfig.slidesToScroll = this.numberOfCells;
+    }
   }
 }

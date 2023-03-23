@@ -17,18 +17,19 @@
       >
     </mat-button-toggle-group>
   </div>
-  <carousel
-    [arrowsOutside]="true"
-    [height]="350"
-    [cellsToShow]="this.numberOfCells"
-    [margin]="10"
-    [arrowsTheme]="'dark'"
+
+  <ngx-slick-carousel
+    *ngIf="slideConfig.slidesToShow > 0"
     class="carousel"
-    [autoplay]="true"
-    [autoplayInterval]="2000"
+    #slickModal="slick-carousel"
+    [config]="slideConfig"
   >
-    <div *ngFor="let movie of this.renderMoviesList" class="carousel-cell">
+    <div
+      ngxSlickItem
+      *ngFor="let movie of this.renderMoviesList"
+      class="carousel-cell"
+    >
       <app-item-card [type]="movie.type" [movie]="movie"></app-item-card>
     </div>
-  </carousel>
+  </ngx-slick-carousel>
 </div>

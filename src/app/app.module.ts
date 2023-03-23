@@ -20,7 +20,6 @@ import { ItemCardComponent } from './components/sections/item-card/item-card.com
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
-import { IvyCarouselModule } from 'carousel-angular';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -42,6 +41,7 @@ import { AuthenticationPageComponent } from './components/pages/authentication-p
 import { AuthorizePageComponent } from './components/pages/authorize-page/authorize-page.component';
 import { AnnouncementComponent } from './components/dialog/announcement/announcement.component';
 import { MovieCardComponent } from './components/sections/movie-card/movie-card.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 export const WINDOW = new InjectionToken('WINDOW');
 @NgModule({
@@ -92,9 +92,9 @@ export const WINDOW = new InjectionToken('WINDOW');
     MatButtonModule,
     MatTooltipModule,
     MatCardModule,
-    IvyCarouselModule,
     MatButtonToggleModule,
     MatDialogModule,
+    SlickCarouselModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       animation: false,

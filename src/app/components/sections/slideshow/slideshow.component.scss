@@ -46,10 +46,25 @@
   }
 }
 
-.carousel-cell {
-  padding-top: 1em;
+.slidePart {
+  position: relative;
+  display: block;
 
-  &:first-child {
-    margin-left: 1em !important;
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
   }
+}
+
+.slick-prev {
+  left: -25px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.slick-next {
+  right: -25px;
+
 }

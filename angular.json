@@ -28,10 +28,15 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss",
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -45,12 +50,6 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -67,6 +66,16 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dev.ts"
                 }
+              ],
+              "styles": [
+                "node_modules/slick-carousel/slick/slick.scss",
+                "node_modules/slick-carousel/slick/slick-theme.scss",
+                "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+                "src/styles.scss"
+              ],
+              "scripts": [
+                "node_modules/jquery/dist/jquery.min.js",
+                "node_modules/slick-carousel/slick/slick.min.js"
               ]
             }
           },
